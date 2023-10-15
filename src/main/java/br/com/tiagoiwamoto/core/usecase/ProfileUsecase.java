@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -34,11 +35,12 @@ public class ProfileUsecase {
         var uuid = UUID.randomUUID();
         var timestamp = LocalDateTime.now();
         dados.setUuid(uuid);
-        dados.setCreatedAt(timestamp);
-        dados.setUpdatedAt(timestamp);
+
 
         log.info("iniciando conversão para ENTITY, metodo gravarRegistro() domínio {}", DOMINIO);
         var registro = this.mapper.toEntity(dados);
+        registro.setCreatedAt(timestamp);
+        registro.setUpdatedAt(timestamp);
         log.info("conversão para ENTITY realizada com sucesso {}", registro);
 
         log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
@@ -49,6 +51,44 @@ public class ProfileUsecase {
         var dto = this.mapper.toDto(registro);
         log.info("conversão para DTO realizada com sucesso {}", dto);
         return dto;
+    }
+
+    public ProfileDTO atualizarRegistro(ProfileDTO dados){
+
+        var timestamp = LocalDateTime.now();
+
+        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(dados.getUuid()));
+
+        if(optionalRegistro.isPresent()){
+            var registroExistente = optionalRegistro.get();
+            //TODO: validar uuid e id entre dto e entity
+
+            log.info("iniciando conversão para ENTITY, metodo atualizarRegistro() domínio {}", DOMINIO);
+            var registro = this.mapper.toEntity(dados);
+            registro.setUpdatedAt(timestamp);
+            registro.setCreatedAt(registroExistente.getCreatedAt());
+            log.info("conversão para ENTITY, metodo atualizarRegistro() realizada com sucesso {}", registro);
+
+            log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
+            registro = this.adapter.update(registro);
+            log.info("registro atualizado com sucesso {}", registro);
+
+            log.info("iniciando conversão para DTO, metodo atualizarRegistro() domínio {}", DOMINIO);
+            var dto = this.mapper.toDto(registro);
+            log.info("conversão para DTO realizada com sucesso {}", dto);
+            return dto;
+        }
+        throw new RuntimeException();
+    }
+
+    public void deletarrRegistro(ProfileDTO dados){
+        log.info("iniciando conversão para ENTITY, metodo gravarRegistro() domínio {}", DOMINIO);
+        var registro = this.mapper.toEntity(dados);
+        log.info("conversão para ENTITY realizada com sucesso {}", registro);
+
+        log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
+        this.adapter.delete(registro);
+        log.info("registro realizado com sucesso {}", registro);
     }
 
 }

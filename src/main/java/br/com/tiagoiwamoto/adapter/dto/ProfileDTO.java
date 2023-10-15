@@ -18,8 +18,6 @@ public class ProfileDTO implements Serializable {
     private static final long serialVersionUID = 2806800246322609997L;
 
     private UUID uuid;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
     private String name;
     private String title;
     private String subTitle;

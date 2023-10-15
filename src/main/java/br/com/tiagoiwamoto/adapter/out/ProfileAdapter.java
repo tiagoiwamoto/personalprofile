@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 @Slf4j
@@ -30,9 +31,9 @@ public class ProfileAdapter implements ProfilePort, Serializable {
     }
 
     @Override
-    public ProfileEntity recoveryByUuid(ProfileEntity data) {
+    public ProfileEntity recoveryByUuid(UUID uuid) {
         log.info("recuperando dados para o metodo byUuid() domínio {}", ADAPTER_NAME);
-        var record = this.repository.find("uuid", data.getUuid()).firstResult();
+        var record = this.repository.find("uuid", uuid).firstResult();
         log.info("Dado recuperado: {}", record);
         return record;
     }
@@ -52,12 +53,22 @@ public class ProfileAdapter implements ProfilePort, Serializable {
     }
 
     @Override
+    @Transactional
     public ProfileEntity update(ProfileEntity data) {
         log.info("inciando atualização para o metodo update() domínio {}", ADAPTER_NAME);
         try{
-            this.repository.persist(data);
-            log.info("Dado atualizado: {}", data);
-            return data;
+            var registro = this.recoveryByUuid(data.getUuid());
+            registro.setSubTitle(data.getSubTitle());
+            registro.setTitle(data.getTitle());
+            registro.setPhone(data.getPhone());
+            registro.setName(data.getName());
+            registro.setEmail(data.getEmail());
+            registro.setDescription(data.getDescription());
+            registro.setIsActive(data.getIsActive());
+            registro.setUpdatedAt(data.getUpdatedAt());
+            this.repository.persist(registro);
+            log.info("Dado atualizado: {}", registro);
+            return registro;
         }catch (Exception e){
             log.error("não foi possível atualizar o dado para o metodo save() domínio {}", ADAPTER_NAME);
             throw new RuntimeException(); //TODO: Criar exception de falha ao atualizar
@@ -65,6 +76,7 @@ public class ProfileAdapter implements ProfilePort, Serializable {
     }
 
     @Override
+    @Transactional
     public void delete(ProfileEntity data) {
         log.info("inciando remoção para o metodo delete() domínio {}", ADAPTER_NAME);
         try{
