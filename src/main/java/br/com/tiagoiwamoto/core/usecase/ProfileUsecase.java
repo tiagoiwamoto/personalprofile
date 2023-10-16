@@ -81,14 +81,24 @@ public class ProfileUsecase {
         throw new RuntimeException();
     }
 
-    public void deletarrRegistro(ProfileDTO dados){
-        log.info("iniciando conversão para ENTITY, metodo gravarRegistro() domínio {}", DOMINIO);
-        var registro = this.mapper.toEntity(dados);
-        log.info("conversão para ENTITY realizada com sucesso {}", registro);
+    public void deletarRegistro(ProfileDTO dados){
 
-        log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
-        this.adapter.delete(registro);
-        log.info("registro realizado com sucesso {}", registro);
+        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(dados.getUuid()));
+
+        if(optionalRegistro.isPresent()){
+            var registroExistente = optionalRegistro.get();
+            log.info("iniciando conversão para ENTITY, metodo deletarRegistro() domínio {}", DOMINIO);
+            var registro = this.mapper.toEntity(dados);
+            log.info("conversão para ENTITY realizada com sucesso {}", registro);
+
+            log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
+            this.adapter.delete(registroExistente);
+            log.info("registro removido com sucesso {}", registro);
+        }else{
+            throw new RuntimeException();
+        }
+
+
     }
 
 }

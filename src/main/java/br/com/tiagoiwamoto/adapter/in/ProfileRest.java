@@ -39,7 +39,7 @@ public class ProfileRest {
 
     @DELETE
     public RestResponse delete(ProfileDTO dados){
-        this.usecase.deletarrRegistro(dados);
+        this.usecase.deletarRegistro(dados);
         return RestResponse.ResponseBuilder.noContent().build();
     }
 
