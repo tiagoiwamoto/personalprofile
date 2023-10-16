@@ -1,0 +1,27 @@
+name: GraalVM Community Edition build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: '23.1.0'
+          java-version: '21'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+      - name: Build
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          gu --version
+          native-image --version
+          mvn -Pnative native:compile -Dmaven.test.skip=true
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: personalprofile
+          path: target/*
