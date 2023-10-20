@@ -9,12 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+
       - uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Build
         run: |
@@ -24,11 +31,13 @@ jobs:
           native-image --version
           mvn package -Dnative
 
+
       - name: Gerando pacote
         uses: actions/upload-artifact@v2
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
+
 
   publish:
     runs-on: ubuntu-latest
