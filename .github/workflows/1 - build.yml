@@ -54,7 +54,8 @@ jobs:
         run: |
           sudo apt install zip unzip
           zip -r personalprofile.zip ${{ github.workspace }}
-          rm -R ${{ github.workspace }}
+          mkdir -p pacote
+          mv personalprofile.zip pacote/personalprofile.zip 
 
       - name: Envio para o servidor
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -62,5 +63,5 @@ jobs:
           server: ${{secrets.FTPSERVER}}
           username: ${{secrets.FTPUSERNAME}}
           password: ${{secrets.FTPPASSWORD}}
-          local-dir:
+          local-dir: ${{ github.workspace }}/pacote/
           server-dir: /home/github/personalprofile/
