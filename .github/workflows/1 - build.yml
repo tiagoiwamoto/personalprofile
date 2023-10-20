@@ -15,6 +15,14 @@ jobs:
           java-version: '21'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
       - name: Build
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -22,11 +30,21 @@ jobs:
           java --version
           native-image --version
           mvn package -Dnative
+
       - name: Gerando pacote
         uses: actions/upload-artifact@v2
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download do artifact
+      - uses: actions/download-artifact@master
+        with:
+          name: personalprofile
+          path:  ${{ github.workspace }}/target/*
+
       - name: Envio para o servidor
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
