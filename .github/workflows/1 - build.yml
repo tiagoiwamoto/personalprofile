@@ -28,7 +28,7 @@ jobs:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
   upload:
-    needs: package
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Envio para o servidor
