@@ -23,6 +23,7 @@ jobs:
           native-image --version
           mvn package -Dnative
   package:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Gerando pacote
@@ -31,6 +32,7 @@ jobs:
           name: personalprofile
           path: target/*
   upload:
+    needs: package
     runs-on: ubuntu-latest
     steps:
       - name: Envio para o servidor
