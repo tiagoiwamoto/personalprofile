@@ -23,6 +23,7 @@ jobs:
           native-image --version
           mvn package -Dnative
   package:
+    runs-on: ubuntu-latest
     steps:
       - name: Gerando pacote
         uses: actions/upload-artifact@v2
@@ -30,6 +31,7 @@ jobs:
           name: personalprofile
           path: target/*
   upload:
+    runs-on: ubuntu-latest
     steps:
       - name: Envio para o servidor
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
