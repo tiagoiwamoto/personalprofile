@@ -49,6 +49,8 @@ jobs:
         with:
           name: personalprofile
           path:  ${{ github.workspace }}/target/*
+
+      - name: Zip
         run: |
           sudo apt install zip unzip
           zip -r personalprofile.zip ${{ github.workspace }}
