@@ -1,5 +1,9 @@
 name: GraalVM Community Edition build
-on: [push, pull_request]
+#on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,8 +21,14 @@ jobs:
           java --version
           native-image --version
           mvn package -Dnative
-      - name: Upload binary
+      - name: Gerando pacote
         uses: actions/upload-artifact@v2
         with:
           name: personalprofile
           path: target/*
+      - name: Envio para o servidor
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{secrets.FTPSERVER}}
+          username: ${{secrets.FTPUSERNAME}}
+          password: ${{secrets.FTPPASSWORD}}
