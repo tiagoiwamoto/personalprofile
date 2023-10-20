@@ -1,10 +1,5 @@
 name: GraalVM Community Edition build
-#on: [push, pull_request]
-on:
-  pull_request:
-    branches:
-      - master
-    types: [closed]
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
