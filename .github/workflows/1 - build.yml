@@ -27,15 +27,10 @@ jobs:
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Envio para o servidor
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{secrets.FTPSERVER}}
           username: ${{secrets.FTPUSERNAME}}
           password: ${{secrets.FTPPASSWORD}}
-          local-dir: ${{ github.workspace }}/
           server-dir: /home/github/personalprofile/
