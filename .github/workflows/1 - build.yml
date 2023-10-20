@@ -22,11 +22,15 @@ jobs:
           java --version
           native-image --version
           mvn package -Dnative
+  package:
+    steps:
       - name: Gerando pacote
         uses: actions/upload-artifact@v2
         with:
           name: personalprofile
           path: target/*
+  upload:
+    steps:
       - name: Envio para o servidor
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
