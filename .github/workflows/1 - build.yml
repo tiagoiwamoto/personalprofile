@@ -37,23 +37,23 @@ jobs:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
 
-    publish-package:
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
+  publish-package:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-        - name: Download do artifact
-          uses: actions/download-artifact@master
-          with:
-            name: personalprofile
-            path:  ${{ github.workspace }}/target/*
+      - name: Download do artifact
+        uses: actions/download-artifact@master
+        with:
+          name: personalprofile
+          path:  ${{ github.workspace }}/target/*
 
-        - name: Envio para o servidor
-          uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-          with:
-            server: ${{secrets.FTPSERVER}}
-            username: ${{secrets.FTPUSERNAME}}
-            password: ${{secrets.FTPPASSWORD}}
-            server-dir: /home/github/personalprofile/
+      - name: Envio para o servidor
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{secrets.FTPSERVER}}
+          username: ${{secrets.FTPUSERNAME}}
+          password: ${{secrets.FTPPASSWORD}}
+          server-dir: /home/github/personalprofile/
