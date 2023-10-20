@@ -36,3 +36,24 @@ jobs:
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Download do artifact
+      - uses: actions/download-artifact@master
+        with:
+          name: personalprofile
+          path:  ${{ github.workspace }}/target/*
+      - run: |
+          unzip ${{ github.workspace }}/target/personalprofile.zip
+          ls -lia
+
+      - name: Envio para o servidor
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{secrets.FTPSERVER}}
+          username: ${{secrets.FTPUSERNAME}}
+          password: ${{secrets.FTPPASSWORD}}
+          server-dir: /home/github/personalprofile/
