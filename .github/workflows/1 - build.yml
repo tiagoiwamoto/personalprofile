@@ -22,10 +22,6 @@ jobs:
           java --version
           native-image --version
           mvn package -Dnative
-  package:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Gerando pacote
         uses: actions/upload-artifact@v2
         with:
