@@ -16,13 +16,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
-      - name: Cache the Maven packages to speed up build
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
       - name: Build
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -36,6 +29,7 @@ jobs:
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
+
   publish:
     runs-on: ubuntu-latest
     steps:
