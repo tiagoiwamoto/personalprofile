@@ -11,8 +11,9 @@
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/personalprofile
-# docker run --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
+# docker stop rabbitmq
+# docker run --name personalprofile --network=host -i --rm -p 8080:8080 quarkus/personalprofile
+# docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
 #
 ###
 FROM ubuntu:jammy

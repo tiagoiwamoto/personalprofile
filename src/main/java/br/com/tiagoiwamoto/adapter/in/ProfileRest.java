@@ -14,7 +14,7 @@ import org.jboss.resteasy.reactive.RestResponse;
 import java.util.List;
 import java.util.UUID;
 
-@Path(value = "/v1/api/profiles2")
+@Path(value = "/v1/api/profiles")
 public class ProfileRest {
 
     @Inject
