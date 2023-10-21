@@ -7,11 +7,12 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/personalprofile .
+# docker build -f Dockerfile.native -t quarkus/personalprofile .
 #
 # Then run the container using:
 #
 # docker run -i --rm -p 8080:8080 quarkus/personalprofile
+# docker run --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
 #
 ###
 FROM ubuntu:jammy
@@ -21,6 +22,8 @@ RUN chown 1001 /work \
     && chown 1001:root /work
 COPY --chown=1001:root *-runner /work/application
 RUN chmod +x /work/application
+ARG POSTGRES_USERNAME=${POSTGRES_USERNAME}
+ARG POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
 EXPOSE 8080
 USER 1001

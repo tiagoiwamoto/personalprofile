@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.jboss.resteasy.reactive.RestResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 @Path(value = "/v1/api/profiles")
 public class ProfileRest {
@@ -22,6 +23,7 @@ public class ProfileRest {
     @GET
     public RestResponse<List<ProfileDTO>> index(){
         var dados = this.usecase.listarRegistros();
+        dados.add(new ProfileDTO(UUID.randomUUID(), "Tiago", "Titulo", "subtitulo", "email@email.com", "11966421579", true, "descrição completa"));
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
 
