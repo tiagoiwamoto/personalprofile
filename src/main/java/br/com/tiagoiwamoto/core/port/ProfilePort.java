@@ -1,6 +1,5 @@
 package br.com.tiagoiwamoto.core.port;
 
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.core.entity.ProfileEntity;
 
 import java.util.List;

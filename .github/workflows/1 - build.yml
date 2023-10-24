@@ -80,5 +80,6 @@ jobs:
           password: ${{ secrets.FTPPASSWORD }}
           port: 22
           script: |
+            /bin/bash
             cd /home/github/personalprofile/
             ./script.sh
