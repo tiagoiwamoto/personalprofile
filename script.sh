@@ -16,10 +16,10 @@ rm personalprofile.zip
 echo "realizando o build da imagem docker"
 docker build -f Dockerfile.native -t quarkus/personalprofile .
 echo "parando e removendo container anterior"
-docker stop personalprofile
-docker rm personalprofile
+docker ps -q --filter name=personalprofile | xargs -r docker stop
+docker ps -aq --filter name=personalprofile | xargs -r docker rm
 echo "executando container com o executavel"
-docker run -d --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
+docker run --name personalprofile -d --network=host -i --env POSTGRES_USERNAME="${POSTGRES_USERNAME}" --env POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" -p 8080:8080 quarkus/personalprofile
 echo "removendo dockerfile e executavel"
 rm Dockerfile.native personalprofile-1.0-SNAPSHOT-runner
 echo "processo finalizado"
