@@ -74,12 +74,18 @@ jobs:
     steps:
       - name: Executando deployment
         uses: appleboy/ssh-action@v1.0.0
+        env:
+          POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
         with:
           host: ${{ secrets.FTPSERVER }}
           username: ${{ secrets.FTPUSERNAME }}
           password: ${{ secrets.FTPPASSWORD }}
           port: 22
+          envs: POSTGRES_USERNAME,POSTGRES_PASSWORD
           script: |
             /bin/bash
             cd /home/github/personalprofile/
+            export POSTGRES_USERNAME="$POSTGRES_USERNAME"
+            export POSTGRES_PASSWORD="$POSTGRES_PASSWORD"
             sh script.sh
