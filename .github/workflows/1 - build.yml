@@ -82,4 +82,6 @@ jobs:
           script: |
             /bin/bash
             cd /home/github/personalprofile/
+            export POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
+            export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
             sh script.sh
