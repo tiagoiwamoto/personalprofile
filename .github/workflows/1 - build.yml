@@ -82,5 +82,4 @@ jobs:
           script: |
             /bin/bash
             cd /home/github/personalprofile/
-            ./script.sh
-            docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
+            sh script.sh
