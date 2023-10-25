@@ -49,6 +49,7 @@ jobs:
         with:
           name: personalprofile
           path:  ${{ github.workspace }}/target/*
+          retention-days: 1
 
       - name: Zip
         run: |
