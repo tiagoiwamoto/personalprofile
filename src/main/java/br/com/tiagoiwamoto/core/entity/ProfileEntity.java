@@ -26,13 +26,17 @@ public class ProfileEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID uuid;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     private String name;
     private String title;
+    @Column(name = "sub_title")
     private String subTitle;
     private String email;
     private String phone;
+    @Column(name = "is_active")
     private Boolean isActive;
     @Column(length = 9999)
     private String description;

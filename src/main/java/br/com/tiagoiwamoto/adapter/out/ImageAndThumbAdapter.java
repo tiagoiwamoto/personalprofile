@@ -60,12 +60,12 @@ public class ImageAndThumbAdapter {
             log.info(String.format("arquivos foram removidos com sucesso do path %s", path));
         }catch (Exception e){
             log.error(String.format("falha ao remover arquivos para o path %s", path), e);
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
     }
 
     public ImageDTO validUpdateOfImage(Path path, FileUpload file, ImageDTO domain){
-        log.info(String.format("validando se uma imagem sera armazenada ou substituida para o path: %s", file.uploadedFile()));
+        log.info(String.format("validando se uma imagem sera armazenada ou substituida para o path: %s", path.toString()));
         ImageDTO imageDto;
         if(!Objects.isNull(file)){
             log.info(String.format("imagem será substituida por uma nova no path: %s", path));

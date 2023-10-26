@@ -29,10 +29,14 @@ public class CertificationEntity {
     private Long id;
     private UUID uuid;
     private String name;
+    @Column(name = "earn_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate earnDate;
+    @Column(name = "validate_url")
     private String validateUrl;
+    @Column(name = "path_of_image")
     private String pathOfImage;
+    @Column(name = "path_of_image_thumb")
     private String pathOfImageThumb;
     @Column(name = "created_at")
     private LocalDateTime createdAt;

@@ -89,19 +89,20 @@ public class CertificationUsecase {
         throw new RuntimeException();
     }
 
-    public void deletarRegistro(CertificationDTO dados){
+    public void deletarRegistro(UUID uuid){
 
-        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(dados.getUuid()));
+        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(uuid));
 
         if(optionalRegistro.isPresent()){
             var registroExistente = optionalRegistro.get();
-            log.info("iniciando conversão para ENTITY, metodo deletarRegistro() domínio {}", DOMINIO);
-            var registro = this.mapper.toEntity(dados);
-            log.info("conversão para ENTITY realizada com sucesso {}", registro);
+            log.info("registro localizado com sucesso {}", registroExistente);
 
             log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
             this.adapter.delete(registroExistente);
-            log.info("registro removido com sucesso {}", registro);
+            log.info("registro removido com sucesso {}", registroExistente);
+            var path = Paths.get(PATH.concat(registroExistente.getUuid().toString()));
+            this.image.removeFiles(path);
+            log.info("imagens para o registro removido com sucesso {}", registroExistente);
         }else{
             throw new RuntimeException();
         }

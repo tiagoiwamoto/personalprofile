@@ -14,6 +14,7 @@ import org.jboss.resteasy.reactive.RestResponse;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Path(value = "/v1/api/certifications")
 public class CertificationRest {
@@ -42,8 +43,10 @@ public class CertificationRest {
     }
 
     @DELETE
-    public RestResponse delete(CertificationDTO dados){
-        this.usecase.deletarRegistro(dados);
+    @Path("/{uuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public RestResponse delete(UUID uuid){
+        this.usecase.deletarRegistro(uuid);
         return RestResponse.ResponseBuilder.noContent().build();
     }
 
