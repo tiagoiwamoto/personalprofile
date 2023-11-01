@@ -132,6 +132,13 @@
             <artifactId>quarkus-hibernate-validator</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-awt -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-awt</artifactId>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>
