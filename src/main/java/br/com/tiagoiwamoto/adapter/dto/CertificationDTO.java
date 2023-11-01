@@ -2,6 +2,7 @@ package br.com.tiagoiwamoto.adapter.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
@@ -29,8 +30,10 @@ public class CertificationDTO {
     private String name;
     @FormParam("earnDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
+//    @NotBlank(message = "Informe a data que recebeu este certificado")
     private LocalDate earnDate;
     @FormParam("validateUrl")
+//    @NotBlank
     private String validateUrl;
     private String pathOfImage;
     private String pathOfImageThumb;

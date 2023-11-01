@@ -3,6 +3,7 @@ package br.com.tiagoiwamoto.adapter.in;
 import br.com.tiagoiwamoto.adapter.dto.CertificationDTO;
 import br.com.tiagoiwamoto.core.usecase.CertificationUsecase;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -30,14 +31,14 @@ public class CertificationRest {
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public RestResponse<CertificationDTO> create(CertificationDTO dados) throws IOException {
+    public RestResponse<CertificationDTO> create(@Valid CertificationDTO dados) throws IOException {
         var resposta = this.usecase.gravarRegistro(dados);
         return RestResponse.ResponseBuilder.create(RestResponse.Status.CREATED, resposta).build();
     }
 
     @PUT
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public RestResponse<CertificationDTO> update(CertificationDTO dados){
+    public RestResponse<CertificationDTO> update(@Valid CertificationDTO dados){
         var resposta = this.usecase.atualizarRegistro(dados);
         return RestResponse.ResponseBuilder.ok(resposta).build();
     }
