@@ -17,6 +17,7 @@
 #
 ###
 FROM ubuntu:jammy
+RUN apt install freetype fontconfig -y
 WORKDIR /work/
 RUN chown 1001 /work \
     && chmod "g+rwX" /work \
