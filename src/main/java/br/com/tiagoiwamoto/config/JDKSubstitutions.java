@@ -30,12 +30,12 @@ final class Target_sun_font_Type1Font {
     }
 }
 
-@TargetClass(className = "sun.awt.FontConfiguration")
-final class Target_sun_awt_FontConfiguration {
-    @Alias
-    protected static String osVersion;
-    @Alias
-    protected static String osName;
+//@TargetClass(className = "sun.awt.FontConfiguration")
+//final class Target_sun_awt_FontConfiguration {
+//    @Alias
+//    protected static String osVersion;
+//    @Alias
+//    protected static String osName;
 
     /**
      * AWT source code does not take into account a situation where "java.home" does not
@@ -46,20 +46,20 @@ final class Target_sun_awt_FontConfiguration {
      * We create a dummy "java.home" in "java.io.tmpdir" and we set it at a reasonable place via
      * substitution.
      */
-    @Substitute
-    protected void setOsNameAndVersion() {
-        final Path javaHome = Path.of(System.getProperty("java.io.tmpdir"), "quarkus-awt-tmp-fonts");
-        try {
-            Files.createDirectories(Path.of(javaHome.toString(), "conf", "fonts"));
-            Files.createDirectories(Path.of(javaHome.toString(), "lib"));
-        } catch (IOException e) {
-            throw new UncheckedIOException("Unable to set tmp java.home for FontConfig Quarkus AWT usage in " + javaHome, e);
-        }
-        System.setProperty("java.home", javaHome.toString());
-        osName = System.getProperty("os.name");
-        osVersion = System.getProperty("os.version");
-    }
-}
+//    @Substitute
+//    protected void setOsNameAndVersion() {
+//        final Path javaHome = Path.of(System.getProperty("java.io.tmpdir"), "quarkus-awt-tmp-fonts");
+//        try {
+//            Files.createDirectories(Path.of(javaHome.toString(), "conf", "fonts"));
+//            Files.createDirectories(Path.of(javaHome.toString(), "lib"));
+//        } catch (IOException e) {
+//            throw new UncheckedIOException("Unable to set tmp java.home for FontConfig Quarkus AWT usage in " + javaHome, e);
+//        }
+//        System.setProperty("java.home", javaHome.toString());
+//        osName = System.getProperty("os.name");
+//        osVersion = System.getProperty("os.version");
+//    }
+//}
 
 public class JDKSubstitutions {
 }
