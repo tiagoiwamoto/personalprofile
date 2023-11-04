@@ -169,7 +169,7 @@
             <path>
               <groupId>io.quarkus</groupId>
               <artifactId>quarkus-extension-processor</artifactId>
-              <version>${project.version}</version>
+              <version>3.5.0</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
