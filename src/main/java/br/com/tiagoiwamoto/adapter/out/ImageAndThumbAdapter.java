@@ -5,8 +5,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -37,10 +41,15 @@ public class ImageAndThumbAdapter {
             var fileInputStream = new FileInputStream(file.uploadedFile().toFile());
             Files.copy(fileInputStream, path.resolve(originalFileName));
             log.info("imagem foi transferida com sucesso");
-            Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
-                    .height(maxHeight)
-                    .outputQuality(outputQuality)
-                    .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
+            var bfImage = ImageIO.read(file.uploadedFile().toFile());
+            BufferedImage img = Scalr.resize(bfImage, 250);
+            File outputfile = new File(path.toString().concat(File.separator).concat(thumbnail));
+            ImageIO.write(img, fileExtension, outputfile);
+//            Files.copy(img, path.resolve(originalFileName));
+//            Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
+//                    .height(maxHeight)
+//                    .outputQuality(outputQuality)
+//                    .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
             log.info("thumbnail foi transferida com sucesso");
             return new ImageDTO(originalFileName, thumbnail);
         } catch (Exception e){
@@ -49,6 +58,10 @@ public class ImageAndThumbAdapter {
             throw new RuntimeException(e);
         }
     }
+
+//    BufferedImage simpleResizeImage(BufferedImage originalImage, int targetWidth) throws Exception {
+//        return Scalr.resize(originalImage, targetWidth);
+//    }
 
     public void removeFiles(Path path){
         try{
