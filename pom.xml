@@ -166,11 +166,11 @@
               <artifactId>mapstruct-processor</artifactId>
               <version>${org.mapstruct.version}</version>
             </path>
-            <path>
-              <groupId>io.quarkus</groupId>
-              <artifactId>quarkus-extension-processor</artifactId>
-              <version>3.5.0</version>
-            </path>
+<!--            <path>-->
+<!--              <groupId>io.quarkus</groupId>-->
+<!--              <artifactId>quarkus-extension-processor</artifactId>-->
+<!--              <version>3.5.0</version>-->
+<!--            </path>-->
           </annotationProcessorPaths>
         </configuration>
       </plugin>
