@@ -7,7 +7,6 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -38,27 +37,10 @@ public class ImageAndThumbAdapter {
             var fileInputStream = new FileInputStream(file.uploadedFile().toFile());
             Files.copy(fileInputStream, path.resolve(originalFileName));
             log.info("imagem foi transferida com sucesso");
-//            var bfImage = ImageIO.read(file.uploadedFile().toFile());
-//            BufferedImage img = Scalr.resize(bfImage, 250);
-//            File outputfile = new File(path.toString().concat(File.separator).concat(thumbnail));
-//            ImageIO.write(img, fileExtension, outputfile);
-//            Files.copy(img, path.resolve(originalFileName));
             Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
                     .height(maxHeight)
                     .outputQuality(outputQuality)
                     .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
-//            StringBuilder sb = new StringBuilder();
-//            sb.append("./create_thumb.sh");
-//            sb.append(" ".concat(fileName));
-//            sb.append(" ".concat(fileExtension));
-//            sb.append(" ".concat("1"));
-//
-//            ProcessBuilder processBuilder = new ProcessBuilder();
-//            processBuilder.command(sb.toString());
-//            Process process = processBuilder.start();
-
-//            int exitCode = process.waitFor();
-//            log.info("resultado da execução do shellscript " + exitCode);
             log.info("thumbnail foi transferida com sucesso");
             return new ImageDTO(originalFileName, thumbnail);
         } catch (Exception e){
@@ -67,10 +49,6 @@ public class ImageAndThumbAdapter {
             throw new RuntimeException(e);
         }
     }
-
-//    BufferedImage simpleResizeImage(BufferedImage originalImage, int targetWidth) throws Exception {
-//        return Scalr.resize(originalImage, targetWidth);
-//    }
 
     public void removeFiles(Path path){
         try{
@@ -82,7 +60,7 @@ public class ImageAndThumbAdapter {
             log.info(String.format("arquivos foram removidos com sucesso do path %s", path));
         }catch (Exception e){
             log.error(String.format("falha ao remover arquivos para o path %s", path), e);
-//            throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
