@@ -28,7 +28,7 @@ COPY --chown=1001:root *-runner /work/application
 RUN chmod +x /work/application
 
 COPY --chown=1001:root create_thumb.sh /work/create_thumb.sh
-RUN chmod +x /work/application/create_thumb.sh
+RUN chmod +x /work/create_thumb.sh
 
 ENV POSTGRES_USERNAME=${POSTGRES_USERNAME}
 ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
