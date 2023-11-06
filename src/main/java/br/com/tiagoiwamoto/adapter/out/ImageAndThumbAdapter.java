@@ -7,7 +7,6 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
-import org.testcontainers.shaded.com.trilead.ssh2.StreamGobbler;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -61,10 +60,9 @@ public class ImageAndThumbAdapter {
             ProcessBuilder processBuilder = new ProcessBuilder();
             processBuilder.command(sb.toString());
             Process process = processBuilder.start();
-            StreamGobbler streamGobbler =
-                    new StreamGobbler(process.getInputStream());
 
             int exitCode = process.waitFor();
+            log.info("resultado da execução do shellscript " + exitCode);
             log.info("thumbnail foi transferida com sucesso");
             return new ImageDTO(originalFileName, thumbnail);
         } catch (Exception e){
