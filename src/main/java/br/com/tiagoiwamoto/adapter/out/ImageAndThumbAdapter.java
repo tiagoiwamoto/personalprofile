@@ -3,14 +3,14 @@ package br.com.tiagoiwamoto.adapter.out;
 import br.com.tiagoiwamoto.adapter.out.dto.ImageDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
-import net.coobird.thumbnailator.Thumbnails;
+//import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
-import org.imgscalr.Scalr;
+//import org.imgscalr.Scalr;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+//import javax.imageio.ImageIO;
+//import java.awt.image.BufferedImage;
+//import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -18,7 +18,6 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.Future;
 
 @ApplicationScoped
 @Slf4j
