@@ -7,6 +7,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
 import org.imgscalr.Scalr;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
+import org.testcontainers.shaded.com.trilead.ssh2.StreamGobbler;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -18,6 +19,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.Future;
 
 @ApplicationScoped
 @Slf4j
@@ -41,15 +43,28 @@ public class ImageAndThumbAdapter {
             var fileInputStream = new FileInputStream(file.uploadedFile().toFile());
             Files.copy(fileInputStream, path.resolve(originalFileName));
             log.info("imagem foi transferida com sucesso");
-            var bfImage = ImageIO.read(file.uploadedFile().toFile());
-            BufferedImage img = Scalr.resize(bfImage, 250);
-            File outputfile = new File(path.toString().concat(File.separator).concat(thumbnail));
-            ImageIO.write(img, fileExtension, outputfile);
+//            var bfImage = ImageIO.read(file.uploadedFile().toFile());
+//            BufferedImage img = Scalr.resize(bfImage, 250);
+//            File outputfile = new File(path.toString().concat(File.separator).concat(thumbnail));
+//            ImageIO.write(img, fileExtension, outputfile);
 //            Files.copy(img, path.resolve(originalFileName));
 //            Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
 //                    .height(maxHeight)
 //                    .outputQuality(outputQuality)
 //                    .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
+            StringBuilder sb = new StringBuilder();
+            sb.append("./create_thumb.sh");
+            sb.append(" ".concat(fileName));
+            sb.append(" ".concat(fileExtension));
+            sb.append(" ".concat("1"));
+
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command(sb.toString());
+            Process process = processBuilder.start();
+            StreamGobbler streamGobbler =
+                    new StreamGobbler(process.getInputStream());
+
+            int exitCode = process.waitFor();
             log.info("thumbnail foi transferida com sucesso");
             return new ImageDTO(originalFileName, thumbnail);
         } catch (Exception e){
