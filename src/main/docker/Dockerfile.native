@@ -13,17 +13,23 @@
 #
 # docker stop rabbitmq
 # docker run --name personalprofile --network=host -i --rm -p 8080:8080 quarkus/personalprofile
-# docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -p 8080:8080 quarkus/personalprofile
+# docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -v /home/github/files:/work/files -p 8080:8080 quarkus/personalprofile
 #
 ###
 FROM ubuntu:jammy
 RUN apt install freetype fontconfig -y
+RUN apt install imagemagick -y
 WORKDIR /work/
 RUN chown 1001 /work \
     && chmod "g+rwX" /work \
-    && chown 1001:root /work
+    && chown 1001:root /work \
+
 COPY --chown=1001:root *-runner /work/application
 RUN chmod +x /work/application
+
+COPY --chown=1001:root create_thumb.sh /work/create_thumb.sh
+RUN chmod +x /work/application/create_thumb.sh
+
 ENV POSTGRES_USERNAME=${POSTGRES_USERNAME}
 ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
