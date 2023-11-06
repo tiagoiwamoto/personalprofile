@@ -3,14 +3,11 @@ package br.com.tiagoiwamoto.adapter.out;
 import br.com.tiagoiwamoto.adapter.out.dto.ImageDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
-//import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FilenameUtils;
-//import org.imgscalr.Scalr;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 
-//import javax.imageio.ImageIO;
-//import java.awt.image.BufferedImage;
-//import java.io.ByteArrayOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -46,22 +43,22 @@ public class ImageAndThumbAdapter {
 //            File outputfile = new File(path.toString().concat(File.separator).concat(thumbnail));
 //            ImageIO.write(img, fileExtension, outputfile);
 //            Files.copy(img, path.resolve(originalFileName));
-//            Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
-//                    .height(maxHeight)
-//                    .outputQuality(outputQuality)
-//                    .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
-            StringBuilder sb = new StringBuilder();
-            sb.append("./create_thumb.sh");
-            sb.append(" ".concat(fileName));
-            sb.append(" ".concat(fileExtension));
-            sb.append(" ".concat("1"));
+            Thumbnails.of(new File(path.toString().concat(File.separator).concat(originalFileName)))
+                    .height(maxHeight)
+                    .outputQuality(outputQuality)
+                    .toFile(new File(path.toString().concat(File.separator).concat(thumbnail)));
+//            StringBuilder sb = new StringBuilder();
+//            sb.append("./create_thumb.sh");
+//            sb.append(" ".concat(fileName));
+//            sb.append(" ".concat(fileExtension));
+//            sb.append(" ".concat("1"));
+//
+//            ProcessBuilder processBuilder = new ProcessBuilder();
+//            processBuilder.command(sb.toString());
+//            Process process = processBuilder.start();
 
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command(sb.toString());
-            Process process = processBuilder.start();
-
-            int exitCode = process.waitFor();
-            log.info("resultado da execução do shellscript " + exitCode);
+//            int exitCode = process.waitFor();
+//            log.info("resultado da execução do shellscript " + exitCode);
             log.info("thumbnail foi transferida com sucesso");
             return new ImageDTO(originalFileName, thumbnail);
         } catch (Exception e){
