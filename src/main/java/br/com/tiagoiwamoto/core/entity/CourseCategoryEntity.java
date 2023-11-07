@@ -34,7 +34,7 @@ public class CourseCategoryEntity {
     private String name;
     @Column(length = 9999)
     private String description;
-//    @OneToMany
-//    @JoinColumn(name = "course_category_id")
-//    private List<CourseDomain> courses;
+    @OneToMany
+    @JoinColumn(name = "course_category_id")
+    private List<CourseEntity> courses;
 }
