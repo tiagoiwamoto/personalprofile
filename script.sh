@@ -9,8 +9,8 @@ echo "Adicionando permissao de execucao ao app"
 chmod +x personalprofile-1.0-SNAPSHOT-runner
 echo "copiando dockerfile..."
 cp home/runner/work/personalprofile/personalprofile/src/main/docker/Dockerfile.native /home/github/personalprofile/
-echo "copiando script para gerar thumb"
-cp home/runner/work/personalprofile/personalprofile/create_thumb.sh /home/github/personalprofile/
+echo "copiando arquivos awt .so"
+cp home/runner/work/personalprofile/personalprofile/target/\*/*.so /home/github/personalprofile/
 echo "removendo diretorio extraido..."
 rm -R /home/github/personalprofile/home
 echo "removendo arquivo compactado..."

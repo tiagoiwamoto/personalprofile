@@ -1,12 +1,9 @@
 package br.com.tiagoiwamoto.core.mapper;
 
 import br.com.tiagoiwamoto.adapter.dto.CertificationDTO;
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.core.entity.CertificationEntity;
-import br.com.tiagoiwamoto.core.entity.ProfileEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "cdi")
 public interface CertificationMapper {
@@ -17,9 +14,9 @@ public interface CertificationMapper {
     @InheritInverseConfiguration(name = "toDto")
     CertificationEntity toEntity(CertificationDTO dto);
 
-    void updateEntityFromDto(CertificationDTO dto, @MappingTarget CertificationEntity entity);
-
-    void updateDtoFromEntity(CertificationEntity entity, @MappingTarget CertificationDTO domain);
+//    void updateEntityFromDto(CertificationDTO dto, @MappingTarget CertificationEntity entity);
+//
+//    void updateDtoFromEntity(CertificationEntity entity, @MappingTarget CertificationDTO domain);
 
     /*
     @Mapper(componentModel = "cdi")
