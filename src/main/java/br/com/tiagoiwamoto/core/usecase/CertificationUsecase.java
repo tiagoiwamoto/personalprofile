@@ -39,7 +39,7 @@ public class CertificationUsecase {
         return listaDeDtos;
     }
 
-    public CertificationDTO gravarRegistro(CertificationDTO dados) throws IOException {
+    public CertificationDTO gravarRegistro(CertificationDTO dados) {
         log.info("iniciando usecase de certification createOrUpdate");
         var timestamp = LocalDateTime.now();
         log.info("certification createOrUpdate -> será criado um novo registro");
@@ -103,9 +103,9 @@ public class CertificationUsecase {
             var path = Paths.get(PATH.concat(registroExistente.getUuid().toString()));
             this.image.removeFiles(path);
             log.info("imagens para o registro removido com sucesso {}", registroExistente);
-        }else{
-            throw new RuntimeException();
         }
+
+        throw new RuntimeException();
 
 
     }
