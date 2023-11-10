@@ -5,10 +5,12 @@ import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
 import br.com.tiagoiwamoto.core.entity.CertificationEntity;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import com.github.javafaker.Faker;
+import jakarta.ws.rs.core.MultivaluedMap;
 import org.jboss.resteasy.reactive.common.util.CaseInsensitiveMap;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 import org.jboss.resteasy.reactive.server.core.multipart.DefaultFileUpload;
 import org.jboss.resteasy.reactive.server.core.multipart.FormData;
+import org.jboss.resteasy.reactive.server.multipart.FileItem;
 import org.jboss.resteasy.reactive.server.multipart.FormValue;
 
 import java.time.LocalDate;
@@ -30,7 +32,7 @@ public class CourseMock {
         data.setDuration(faker.number().randomDouble(1,1, 999));
         data.setCourseCategoryUuid(UUID.randomUUID());
         data.setTitle(faker.funnyName().name());
-        data.setFile(new DefaultFileUpload(faker.funnyName().name(), generateMockFile()));
+        data.setFile(new DefaultFileUpload(faker.funnyName().name(), null));
         data.setId(faker.number().numberBetween(1L, 9999));
         data.setCreatedAt(LocalDateTime.now());
         data.setUpdatedAt(LocalDateTime.now());
@@ -42,10 +44,12 @@ public class CourseMock {
         var data = new CourseEntity();
         data.setUuid(UUID.randomUUID());
         data.setName(faker.name().fullName());
-        data.setEarnDate(LocalDate.now());
         data.setPathOfImage("/files/mock/arquivo.png");
         data.setPathOfImageThumb("/files/mock/arquivo_th.png");
-        data.setValidateUrl(faker.internet().url());
+        data.setSchool(faker.funnyName().name());
+        data.setDuration(faker.number().randomDouble(1,1, 999));
+        data.setCourseCategory(CourseCategoryMock.generateDataEntity());
+        data.setTitle(faker.funnyName().name());
         data.setId(faker.number().numberBetween(1L, 9999));
         data.setCreatedAt(LocalDateTime.now());
         data.setUpdatedAt(LocalDateTime.now());
