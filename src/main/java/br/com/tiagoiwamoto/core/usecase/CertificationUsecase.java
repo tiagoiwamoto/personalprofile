@@ -103,9 +103,9 @@ public class CertificationUsecase {
             var path = Paths.get(PATH.concat(registroExistente.getUuid().toString()));
             this.image.removeFiles(path);
             log.info("imagens para o registro removido com sucesso {}", registroExistente);
+        }else{
+            throw new RuntimeException();
         }
-
-        throw new RuntimeException();
 
 
     }
