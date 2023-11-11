@@ -1,18 +1,27 @@
 package br.com.tiagoiwamoto.core.mapper;
 
-import br.com.tiagoiwamoto.adapter.dto.CertificationDTO;
-import br.com.tiagoiwamoto.core.entity.CertificationEntity;
-import org.mapstruct.InheritInverseConfiguration;
+import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
+import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.UUID;
 
 @Mapper(componentModel = "cdi")
-public interface CertificationMapper {
+public interface CourseMapper {
 
 //    ProfileMapper INSTANCE = Mappers.getMapper(ProfileMapper.class);
 
-    CertificationDTO toDto(CertificationEntity entity);
-    @InheritInverseConfiguration(name = "toDto")
-    CertificationEntity toEntity(CertificationDTO dto);
+//    @Mapping(source = "entity", target = "courseCategory", qualifiedByName = "categoryUuid")
+    @Mapping( expression = "java(toCourseCategoryDto(entity))", target = "courseCategoryUuid")
+    CourseDTO toDto(CourseEntity entity);
+    @Mapping(target = "courseCategory", ignore = true)
+    CourseEntity toEntity(CourseDTO dto);
+
+//    @Named("categoryUuid")
+    default UUID toCourseCategoryDto(CourseEntity entity){
+        return entity.getCourseCategory().getUuid();
+    }
 
 //    void updateEntityFromDto(CertificationDTO dto, @MappingTarget CertificationEntity entity);
 //
