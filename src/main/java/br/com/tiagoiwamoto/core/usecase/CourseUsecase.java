@@ -10,7 +10,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,7 +39,7 @@ public class CourseUsecase {
         return listaDeDtos;
     }
 
-    public CourseDTO gravarRegistro(CourseDTO dados) throws IOException {
+    public CourseDTO gravarRegistro(CourseDTO dados) {
         log.info("iniciando usecase de courses createOrUpdate, {}", DOMINIO);
         var timestamp = LocalDateTime.now();
         log.info("certification gravarRegistro -> será criado um novo registro, {}", DOMINIO);

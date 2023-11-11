@@ -94,7 +94,8 @@ class CertificationUsecaseTest {
     void atualizarRegistroNaoExistente() {
         var dadosDto = CertificationMock.generateDataDto();
 
-        Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(null);
+        Mockito.when(this.adapter.recoveryByUuid(Mockito.any()))
+                .thenReturn(null);
 
 
         Assertions.assertThrows(
@@ -119,13 +120,13 @@ class CertificationUsecaseTest {
 
     @Test
     void deletarRegistroNaoExistente() {
-        var dadosDto = CertificationMock.generateDataDto();
 
-        Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(null);
+        Mockito.when(this.adapter.recoveryByUuid(Mockito.any(UUID.class)))
+                .thenReturn(null);
 
 
         Assertions.assertThrows(
-                RuntimeException.class, () -> this.usecase.deletarRegistro(dadosDto.getUuid())
+                RuntimeException.class, () -> this.usecase.deletarRegistro(Mockito.any(UUID.class))
         );
         Mockito.verify(this.adapter, Mockito.times(1)).recoveryByUuid(Mockito.any());
     }

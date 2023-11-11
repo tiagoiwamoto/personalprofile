@@ -1,11 +1,8 @@
 package br.com.tiagoiwamoto.adapter.out;
 
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
-import br.com.tiagoiwamoto.core.entity.ProfileEntity;
 import br.com.tiagoiwamoto.core.port.CoursePort;
-import br.com.tiagoiwamoto.core.port.ProfilePort;
 import br.com.tiagoiwamoto.core.repository.CourseRepository;
-import br.com.tiagoiwamoto.core.repository.ProfileRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

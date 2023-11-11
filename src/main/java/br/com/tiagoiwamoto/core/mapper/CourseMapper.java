@@ -1,12 +1,9 @@
 package br.com.tiagoiwamoto.core.mapper;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
-import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 
 import java.util.UUID;
 

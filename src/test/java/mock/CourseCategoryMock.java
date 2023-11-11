@@ -1,9 +1,7 @@
 package mock;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseCategoryDTO;
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
-import br.com.tiagoiwamoto.core.entity.ProfileEntity;
 import com.github.javafaker.Faker;
 
 import java.util.Locale;

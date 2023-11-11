@@ -1,7 +1,6 @@
 package br.com.tiagoiwamoto.core.port;
 
 import br.com.tiagoiwamoto.core.entity.CertificationEntity;
-import org.jboss.resteasy.reactive.multipart.FileUpload;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,25 +1,12 @@
 package br.com.tiagoiwamoto.adapter.dto;
 
-import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 import org.jboss.resteasy.reactive.PartType;
 import org.jboss.resteasy.reactive.multipart.FileUpload;

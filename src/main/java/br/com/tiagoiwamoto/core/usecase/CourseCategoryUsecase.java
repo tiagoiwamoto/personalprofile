@@ -1,11 +1,8 @@
 package br.com.tiagoiwamoto.core.usecase;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseCategoryDTO;
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.adapter.out.CourseCategoryAdapter;
-import br.com.tiagoiwamoto.adapter.out.ProfileAdapter;
 import br.com.tiagoiwamoto.core.mapper.CourseCategoryMapper;
-import br.com.tiagoiwamoto.core.mapper.ProfileMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;

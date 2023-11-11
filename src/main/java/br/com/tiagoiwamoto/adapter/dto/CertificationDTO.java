@@ -2,7 +2,6 @@ package br.com.tiagoiwamoto.adapter.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;

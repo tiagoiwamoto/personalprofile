@@ -1,19 +1,13 @@
 package mock;
 
-import br.com.tiagoiwamoto.adapter.dto.CertificationDTO;
 import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
-import br.com.tiagoiwamoto.core.entity.CertificationEntity;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import com.github.javafaker.Faker;
-import jakarta.ws.rs.core.MultivaluedMap;
 import org.jboss.resteasy.reactive.common.util.CaseInsensitiveMap;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 import org.jboss.resteasy.reactive.server.core.multipart.DefaultFileUpload;
 import org.jboss.resteasy.reactive.server.core.multipart.FormData;
-import org.jboss.resteasy.reactive.server.multipart.FileItem;
-import org.jboss.resteasy.reactive.server.multipart.FormValue;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;

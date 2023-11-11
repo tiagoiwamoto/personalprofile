@@ -1,9 +1,7 @@
 package mock;
 
 import br.com.tiagoiwamoto.adapter.dto.CertificationDTO;
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.core.entity.CertificationEntity;
-import br.com.tiagoiwamoto.core.entity.ProfileEntity;
 import com.github.javafaker.Faker;
 
 import java.time.LocalDate;

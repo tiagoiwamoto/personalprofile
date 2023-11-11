@@ -1,9 +1,7 @@
 package mock;
 
-import jakarta.ws.rs.core.MultivaluedMap;
 import org.jboss.resteasy.reactive.common.util.CaseInsensitiveMap;
 import org.jboss.resteasy.reactive.server.core.multipart.FormData;
-import org.jboss.resteasy.reactive.server.multipart.FileItem;
 import org.jboss.resteasy.reactive.server.multipart.FormValue;
 
 import java.nio.file.Path;
