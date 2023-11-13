@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -15,18 +16,16 @@ import java.util.UUID;
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class ProfileDTO implements Serializable {
+public class ExperienceDTO implements Serializable {
 
-    private static final long serialVersionUID = 2806800246322609997L;
+    private static final long serialVersionUID = 426825892622467560L;
 
     private UUID uuid;
-    private String name;
-    private String title;
-    private String subTitle;
-    private String email;
-    private String phone;
-    private Boolean isActive;
-    private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String job;
+    private String company;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String description;
 }
