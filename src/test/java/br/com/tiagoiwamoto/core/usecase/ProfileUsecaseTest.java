@@ -93,7 +93,7 @@ class ProfileUsecaseTest {
         Mockito.doNothing().when(this.adapter).delete(Mockito.any());
         Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(dados);
 
-        this.usecase.deletarRegistro(dadosDto);
+        this.usecase.deletarRegistro(dadosDto.getUuid());
 
         Mockito.verify(this.adapter, Mockito.times(1)).delete(Mockito.any());
     }
@@ -105,7 +105,7 @@ class ProfileUsecaseTest {
 
 
         Assertions.assertThrows(
-                RuntimeException.class, () -> this.usecase.deletarRegistro(dadosDto)
+                RuntimeException.class, () -> this.usecase.deletarRegistro(dadosDto.getUuid())
         );
         Mockito.verify(this.adapter, Mockito.times(1)).recoveryByUuid(Mockito.any());
     }

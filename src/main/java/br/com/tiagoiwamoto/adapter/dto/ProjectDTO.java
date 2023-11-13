@@ -15,19 +15,15 @@ import java.util.UUID;
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class ProfileDTO implements Serializable {
+public class ProjectDTO implements Serializable {
 
-    private static final long serialVersionUID = 2806800246322609997L;
+    private static final long serialVersionUID = -6731134143689559604L;
 
     private Long id;
     private UUID uuid;
-    private String name;
-    private String title;
-    private String subTitle;
-    private String email;
-    private String phone;
-    private Boolean isActive;
-    private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String name;
+    private String description;
+    private String url;
 }

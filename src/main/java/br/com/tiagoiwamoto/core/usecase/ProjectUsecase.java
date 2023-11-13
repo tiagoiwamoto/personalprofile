@@ -1,13 +1,12 @@
 package br.com.tiagoiwamoto.core.usecase;
 
-import br.com.tiagoiwamoto.adapter.dto.CourseCategoryDTO;
-import br.com.tiagoiwamoto.adapter.out.CourseCategoryAdapter;
-import br.com.tiagoiwamoto.core.mapper.CourseCategoryMapper;
+import br.com.tiagoiwamoto.adapter.dto.ProjectDTO;
+import br.com.tiagoiwamoto.adapter.out.ProjectAdapter;
+import br.com.tiagoiwamoto.core.mapper.ProjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,16 +14,15 @@ import java.util.UUID;
 
 @ApplicationScoped
 @Slf4j
-public class CourseCategoryUsecase implements Serializable {
+public class ProjectUsecase {
 
-    private static final long serialVersionUID = 3535780205141440644L;
     @Inject
-    private CourseCategoryAdapter adapter;
+    private ProjectAdapter adapter;
     @Inject
-    private CourseCategoryMapper mapper;
-    private final String DOMINIO = "courseCategory";
+    private ProjectMapper mapper;
+    private final String DOMINIO = "project";
 
-    public List<CourseCategoryDTO> listarRegistros(){
+    public List<ProjectDTO> listarRegistros(){
         var dados = this.adapter.all();
         log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
         var listaDeDtos = dados.stream().map(registro -> this.mapper.toDto(registro)).toList();
@@ -32,7 +30,7 @@ public class CourseCategoryUsecase implements Serializable {
         return listaDeDtos;
     }
 
-    public CourseCategoryDTO gravarRegistro(CourseCategoryDTO dados){
+    public ProjectDTO gravarRegistro(ProjectDTO dados){
 
         var uuid = UUID.randomUUID();
         var timestamp = LocalDateTime.now();
@@ -55,7 +53,7 @@ public class CourseCategoryUsecase implements Serializable {
         return dto;
     }
 
-    public CourseCategoryDTO atualizarRegistro(CourseCategoryDTO dados){
+    public ProjectDTO atualizarRegistro(ProjectDTO dados){
 
         var timestamp = LocalDateTime.now();
 
@@ -89,7 +87,6 @@ public class CourseCategoryUsecase implements Serializable {
 
         if(optionalRegistro.isPresent()){
             var registroExistente = optionalRegistro.get();
-
             log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
             this.adapter.delete(registroExistente);
             log.info("registro removido com sucesso {}", registroExistente);

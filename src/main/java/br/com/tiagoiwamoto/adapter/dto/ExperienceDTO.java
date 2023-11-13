@@ -20,6 +20,7 @@ public class ExperienceDTO implements Serializable {
 
     private static final long serialVersionUID = 426825892622467560L;
 
+    private Long id;
     private UUID uuid;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

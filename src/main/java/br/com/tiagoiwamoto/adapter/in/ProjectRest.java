@@ -1,7 +1,7 @@
 package br.com.tiagoiwamoto.adapter.in;
 
-import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
-import br.com.tiagoiwamoto.core.usecase.ProfileUsecase;
+import br.com.tiagoiwamoto.adapter.dto.ProjectDTO;
+import br.com.tiagoiwamoto.core.usecase.ProjectUsecase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -14,26 +14,26 @@ import org.jboss.resteasy.reactive.RestResponse;
 import java.util.List;
 import java.util.UUID;
 
-@Path(value = "/v1/api/profiles")
-public class ProfileRest {
+@Path(value = "/v1/api/projects")
+public class ProjectRest {
 
     @Inject
-    private ProfileUsecase usecase;
+    private ProjectUsecase usecase;
 
     @GET
-    public RestResponse<List<ProfileDTO>> index(){
+    public RestResponse<List<ProjectDTO>> index(){
         var dados = this.usecase.listarRegistros();
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
 
     @POST
-    public RestResponse<ProfileDTO> create(ProfileDTO dados){
+    public RestResponse<ProjectDTO> create(ProjectDTO dados){
         var resposta = this.usecase.gravarRegistro(dados);
         return RestResponse.ResponseBuilder.create(RestResponse.Status.CREATED, resposta).build();
     }
 
     @PUT
-    public RestResponse<ProfileDTO> update(ProfileDTO dados){
+    public RestResponse<ProjectDTO> update(ProjectDTO dados){
         var resposta = this.usecase.atualizarRegistro(dados);
         return RestResponse.ResponseBuilder.ok(resposta).build();
     }

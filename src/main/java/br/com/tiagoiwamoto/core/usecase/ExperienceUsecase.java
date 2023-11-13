@@ -81,19 +81,16 @@ public class ExperienceUsecase {
         throw new RuntimeException();
     }
 
-    public void deletarRegistro(ExperienceDTO dados){
+    public void deletarRegistro(UUID uuid){
 
-        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(dados.getUuid()));
+        var optionalRegistro = Optional.of(this.adapter.recoveryByUuid(uuid));
 
         if(optionalRegistro.isPresent()){
             var registroExistente = optionalRegistro.get();
-            log.info("iniciando conversão para ENTITY, metodo deletarRegistro() domínio {}", DOMINIO);
-            var registro = this.mapper.toEntity(dados);
-            log.info("conversão para ENTITY realizada com sucesso {}", registro);
 
             log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
             this.adapter.delete(registroExistente);
-            log.info("registro removido com sucesso {}", registro);
+            log.info("registro removido com sucesso {}", registroExistente);
         }else{
             throw new RuntimeException();
         }
