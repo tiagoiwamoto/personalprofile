@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.jboss.resteasy.reactive.RestResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 @Path(value = "/v1/api/experiences")
 public class ExperienceRest {
@@ -38,8 +39,9 @@ public class ExperienceRest {
     }
 
     @DELETE
-    public RestResponse delete(ExperienceDTO dados){
-        this.usecase.deletarRegistro(dados);
+    @Path("/{uuid}")
+    public RestResponse delete(UUID uuid){
+        this.usecase.deletarRegistro(uuid);
         return RestResponse.ResponseBuilder.noContent().build();
     }
 

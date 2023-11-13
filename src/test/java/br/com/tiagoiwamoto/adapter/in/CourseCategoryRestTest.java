@@ -62,7 +62,7 @@ class CourseCategoryRestTest {
     void delete() {
         var dados = CourseCategoryMock.generateDataDto();
         Mockito.doNothing().when(this.usecase).deletarRegistro(Mockito.any());
-        var resposta = this.rest.delete(dados);
+        var resposta = this.rest.delete(dados.getUuid());
 
         Assertions.assertEquals(204, resposta.getStatus());
         Mockito.verify(this.usecase, Mockito.times(1)).deletarRegistro(Mockito.any());
