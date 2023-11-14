@@ -39,6 +39,18 @@ public class CourseUsecase {
         return listaDeDtos;
     }
 
+    public List<CourseDTO> listarRegistrosPorCategoria(UUID uuid){
+        var category = this.courseCategoryAdapter.recoveryByUuid(uuid);
+        if(Optional.of(category).isPresent()){
+            var dados = this.adapter.allByCategory(category);
+            log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
+            var listaDeDtos = dados.stream().map(registro -> this.mapper.toDto(registro)).toList();
+            log.info("conversão para DTO realizada com sucesso {}", listaDeDtos);
+            return listaDeDtos;
+        }
+        throw new RuntimeException("Categoria não foi localizada");
+    }
+
     public CourseDTO gravarRegistro(CourseDTO dados) {
         log.info("iniciando usecase de courses createOrUpdate, {}", DOMINIO);
         var timestamp = LocalDateTime.now();

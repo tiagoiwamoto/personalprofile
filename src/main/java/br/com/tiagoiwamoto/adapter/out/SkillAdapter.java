@@ -1,9 +1,8 @@
 package br.com.tiagoiwamoto.adapter.out;
 
-import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
-import br.com.tiagoiwamoto.core.entity.CourseEntity;
-import br.com.tiagoiwamoto.core.port.CoursePort;
-import br.com.tiagoiwamoto.core.repository.CourseRepository;
+import br.com.tiagoiwamoto.core.entity.SkillEntity;
+import br.com.tiagoiwamoto.core.port.SkillPort;
+import br.com.tiagoiwamoto.core.repository.SkillRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -15,31 +14,24 @@ import java.util.UUID;
 
 @ApplicationScoped
 @Slf4j
-public class CourseAdapter implements CoursePort, Serializable {
+public class SkillAdapter implements SkillPort, Serializable {
 
-    private static final long serialVersionUID = 8957653368675992972L;
     @Inject
-    private CourseRepository repository;
-    private final String ADAPTER_NAME = "courses";
+    private SkillRepository repository;
+    private final String ADAPTER_NAME = "skill";
 
+    private static final long serialVersionUID = -3618725302763081734L;
 
     @Override
-    public List<CourseEntity> all() {
+    public List<SkillEntity> all() {
         log.info("recuperando dados para o metodo all() domínio {}", ADAPTER_NAME);
         var records = this.repository.findAll().list();
         log.info("Dados recuperados: {}", records.size());
         return records;
     }
 
-    public List<CourseEntity> allByCategory(CourseCategoryEntity category) {
-        log.info("recuperando dados para o metodo allByCategory() domínio {}", ADAPTER_NAME);
-        var records = this.repository.find("courseCategory", category).list();
-        log.info("Dados recuperados: {}", records.size());
-        return records;
-    }
-
     @Override
-    public CourseEntity recoveryByUuid(UUID uuid) {
+    public SkillEntity recoveryByUuid(UUID uuid) {
         log.info("recuperando dados para o metodo byUuid() domínio {}", ADAPTER_NAME);
         var record = this.repository.find("uuid", uuid).firstResult();
         log.info("Dado recuperado: {}", record);
@@ -48,7 +40,7 @@ public class CourseAdapter implements CoursePort, Serializable {
 
     @Override
     @Transactional
-    public CourseEntity save(CourseEntity data) {
+    public SkillEntity save(SkillEntity data) {
         log.info("inciando gravação para o metodo save() domínio {}", ADAPTER_NAME);
         try{
             this.repository.persist(data);
@@ -62,20 +54,13 @@ public class CourseAdapter implements CoursePort, Serializable {
 
     @Override
     @Transactional
-    public CourseEntity update(CourseEntity data) {
+    public SkillEntity update(SkillEntity data) {
         log.info("inciando atualização para o metodo update() domínio {}", ADAPTER_NAME);
         try{
             var registro = this.recoveryByUuid(data.getUuid());
-            registro.setName(data.getName());
-            registro.setTitle(data.getTitle());
-            registro.setSchool(data.getSchool());
-            registro.setDuration(data.getDuration());
-            registro.setStartDate(data.getStartDate());
-            registro.setEndDate(data.getEndDate());
+            registro.setCategory(data.getCategory());
+            registro.setHabilities(data.getHabilities());
             registro.setUpdatedAt(data.getUpdatedAt());
-            registro.setCourseCategory(data.getCourseCategory());
-            registro.setPathOfImage(data.getPathOfImage());
-            registro.setPathOfImageThumb(data.getPathOfImageThumb());
             this.repository.persist(registro);
             log.info("Dado atualizado: {}", registro);
             return registro;
@@ -87,7 +72,7 @@ public class CourseAdapter implements CoursePort, Serializable {
 
     @Override
     @Transactional
-    public void delete(CourseEntity data) {
+    public void delete(SkillEntity data) {
         log.info("inciando remoção para o metodo delete() domínio {}", ADAPTER_NAME);
         try{
             this.repository.delete(data);

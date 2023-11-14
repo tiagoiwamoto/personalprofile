@@ -43,6 +43,27 @@ class CourseRestTest {
     }
 
     @Test
+    void indexByCategory() {
+        var dados = CourseMock.generateDataDto();
+        Mockito.when(this.usecase.listarRegistrosPorCategoria(Mockito.any())).thenReturn(List.of(dados));
+        var resposta = this.rest.index(Mockito.any());
+
+        Assertions.assertEquals(200, resposta.getStatus());
+        Assertions.assertEquals(dados.getUuid(), resposta.getEntity().get(0).getUuid());
+        Assertions.assertEquals(dados.getName(), resposta.getEntity().get(0).getName());
+        Assertions.assertEquals(dados.getPathOfImage(), resposta.getEntity().get(0).getPathOfImage());
+        Assertions.assertEquals(dados.getPathOfImageThumb(), resposta.getEntity().get(0).getPathOfImageThumb());
+        Assertions.assertEquals(dados.getDuration(), resposta.getEntity().get(0).getDuration());
+        Assertions.assertEquals(dados.getSchool(), resposta.getEntity().get(0).getSchool());
+        Assertions.assertEquals(dados.getStartDate(), resposta.getEntity().get(0).getStartDate());
+        Assertions.assertEquals(dados.getEndDate(), resposta.getEntity().get(0).getEndDate());
+        Assertions.assertEquals(dados.getCourseCategoryUuid(), resposta.getEntity().get(0).getCourseCategoryUuid());
+        Assertions.assertEquals(dados.getCreatedAt(), resposta.getEntity().get(0).getCreatedAt());
+        Assertions.assertEquals(dados.getUpdatedAt(), resposta.getEntity().get(0).getUpdatedAt());
+        Mockito.verify(this.usecase, Mockito.times(1)).listarRegistrosPorCategoria(Mockito.any());
+    }
+
+    @Test
     void create() throws IOException {
         var dados = CourseMock.generateDataDto();
         Mockito.when(this.usecase.gravarRegistro(Mockito.any())).thenReturn(dados);

@@ -1,12 +1,14 @@
 package br.com.tiagoiwamoto.core.usecase;
 
 import br.com.tiagoiwamoto.adapter.out.CourseAdapter;
+import br.com.tiagoiwamoto.adapter.out.CourseCategoryAdapter;
 import br.com.tiagoiwamoto.adapter.out.ImageAndThumbAdapter;
 import br.com.tiagoiwamoto.adapter.out.dto.ImageDTO;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
+import mock.CourseCategoryMock;
 import mock.CourseMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ class CourseUsecaseTest {
 
     @InjectMock
     private CourseAdapter adapter;
+    @InjectMock
+    private CourseCategoryAdapter courseCategoryAdapter;
     @InjectMock
     private ImageAndThumbAdapter image;
 
@@ -44,6 +48,40 @@ class CourseUsecaseTest {
         Assertions.assertEquals(dados.getCreatedAt(), resposta.get(0).getCreatedAt());
         Assertions.assertEquals(dados.getUpdatedAt(), resposta.get(0).getUpdatedAt());
         Mockito.verify(this.adapter, Mockito.times(1)).all();
+    }
+
+    @Test
+    void listarRegistrosPorCategoria() {
+        var dados = CourseMock.generateDataEntity();
+        var categoryDados = CourseCategoryMock.generateDataEntity();
+        Mockito.when(this.adapter.allByCategory(Mockito.any())).thenReturn(List.of(dados));
+        Mockito.when(this.courseCategoryAdapter.recoveryByUuid(Mockito.any())).thenReturn(categoryDados);
+        var resposta = this.usecase.listarRegistrosPorCategoria(dados.getUuid());
+
+        Assertions.assertEquals(dados.getUuid(), resposta.get(0).getUuid());
+        Assertions.assertEquals(dados.getName(), resposta.get(0).getName());
+        Assertions.assertEquals(dados.getPathOfImage(), resposta.get(0).getPathOfImage());
+        Assertions.assertEquals(dados.getPathOfImageThumb(), resposta.get(0).getPathOfImageThumb());
+        Assertions.assertEquals(dados.getDuration(), resposta.get(0).getDuration());
+        Assertions.assertEquals(dados.getSchool(), resposta.get(0).getSchool());
+        Assertions.assertEquals(dados.getStartDate(), resposta.get(0).getStartDate());
+        Assertions.assertEquals(dados.getEndDate(), resposta.get(0).getEndDate());
+        Assertions.assertEquals(dados.getCourseCategory().getUuid(), resposta.get(0).getCourseCategoryUuid());
+        Assertions.assertEquals(dados.getCreatedAt(), resposta.get(0).getCreatedAt());
+        Assertions.assertEquals(dados.getUpdatedAt(), resposta.get(0).getUpdatedAt());
+        Mockito.verify(this.adapter, Mockito.times(1)).allByCategory(Mockito.any());
+    }
+
+    @Test
+    void listarRegistrosPorCategoriaNaoExistente() {
+        var dados = CourseMock.generateDataEntity();
+        Mockito.when(this.courseCategoryAdapter.recoveryByUuid(dados.getUuid())).thenReturn(null);
+
+
+        Assertions.assertThrows(
+                RuntimeException.class, () -> this.usecase.listarRegistrosPorCategoria(dados.getUuid())
+        );
+//        Mockito.verify(this.adapter, Mockito.times(1)).recoveryByUuid(dados.getUuid());
     }
 
     @Test
