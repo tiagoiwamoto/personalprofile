@@ -1,5 +1,6 @@
 package br.com.tiagoiwamoto.adapter.out;
 
+import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import br.com.tiagoiwamoto.core.port.CoursePort;
 import br.com.tiagoiwamoto.core.repository.CourseRepository;
@@ -26,6 +27,13 @@ public class CourseAdapter implements CoursePort, Serializable {
     public List<CourseEntity> all() {
         log.info("recuperando dados para o metodo all() domínio {}", ADAPTER_NAME);
         var records = this.repository.findAll().list();
+        log.info("Dados recuperados: {}", records.size());
+        return records;
+    }
+
+    public List<CourseEntity> allByCategory(CourseCategoryEntity category) {
+        log.info("recuperando dados para o metodo allByCategory() domínio {}", ADAPTER_NAME);
+        var records = this.repository.find("courseCategory", category).list();
         log.info("Dados recuperados: {}", records.size());
         return records;
     }

@@ -29,6 +29,13 @@ public class CourseRest {
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/category/{uuid}")
+    public RestResponse<List<CourseDTO>> index(UUID uuid){
+        var dados = this.usecase.listarRegistrosPorCategoria(uuid);
+        return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
+    }
+
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public RestResponse<CourseDTO> create(@Valid CourseDTO dados) throws IOException {
