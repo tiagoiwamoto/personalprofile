@@ -1,12 +1,10 @@
 package br.com.tiagoiwamoto.adapter.out;
 
-import br.com.tiagoiwamoto.core.repository.ProjectRepository;
 import br.com.tiagoiwamoto.core.repository.ResumeRepository;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import mock.ProjectMock;
 import mock.ResumeMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

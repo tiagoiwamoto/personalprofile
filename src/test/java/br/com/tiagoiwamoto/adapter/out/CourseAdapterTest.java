@@ -1,7 +1,5 @@
 package br.com.tiagoiwamoto.adapter.out;
 
-import br.com.tiagoiwamoto.core.entity.CourseCategoryEntity;
-import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import br.com.tiagoiwamoto.core.repository.CourseRepository;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.test.InjectMock;

@@ -1,10 +1,7 @@
 package br.com.tiagoiwamoto.adapter.out;
 
-import br.com.tiagoiwamoto.core.entity.ResumeEntity;
 import br.com.tiagoiwamoto.core.entity.ScholarityEntity;
-import br.com.tiagoiwamoto.core.port.ResumePort;
 import br.com.tiagoiwamoto.core.port.ScholarityPort;
-import br.com.tiagoiwamoto.core.repository.ResumeRepository;
 import br.com.tiagoiwamoto.core.repository.ScholarityRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
