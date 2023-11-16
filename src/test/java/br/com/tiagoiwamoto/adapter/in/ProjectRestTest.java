@@ -1,11 +1,9 @@
 package br.com.tiagoiwamoto.adapter.in;
 
-import br.com.tiagoiwamoto.core.usecase.ProfileUsecase;
 import br.com.tiagoiwamoto.core.usecase.ProjectUsecase;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import mock.ProfileMock;
 import mock.ProjectMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

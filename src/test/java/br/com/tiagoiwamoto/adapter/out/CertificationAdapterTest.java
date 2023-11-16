@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
-import java.util.UUID;
 
 @QuarkusTest
 class CertificationAdapterTest {

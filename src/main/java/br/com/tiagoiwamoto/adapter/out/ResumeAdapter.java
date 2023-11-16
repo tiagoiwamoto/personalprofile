@@ -1,10 +1,7 @@
 package br.com.tiagoiwamoto.adapter.out;
 
-import br.com.tiagoiwamoto.core.entity.ProjectEntity;
 import br.com.tiagoiwamoto.core.entity.ResumeEntity;
-import br.com.tiagoiwamoto.core.port.ProjectPort;
 import br.com.tiagoiwamoto.core.port.ResumePort;
-import br.com.tiagoiwamoto.core.repository.ProjectRepository;
 import br.com.tiagoiwamoto.core.repository.ResumeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
