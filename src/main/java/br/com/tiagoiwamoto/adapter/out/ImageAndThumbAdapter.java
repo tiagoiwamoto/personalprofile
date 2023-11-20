@@ -60,7 +60,7 @@ public class ImageAndThumbAdapter {
             log.info(String.format("arquivos foram removidos com sucesso do path %s", path));
         }catch (Exception e){
             log.error(String.format("falha ao remover arquivos para o path %s", path), e);
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
     }
 
