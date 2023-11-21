@@ -2,6 +2,7 @@ package br.com.tiagoiwamoto.adapter.in;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseCategoryDTO;
 import br.com.tiagoiwamoto.core.usecase.CourseCategoryUsecase;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path(value = "/v1/api/courses_categories")
+@Authenticated
 public class CourseCategoryRest {
 
     @Inject
@@ -23,6 +25,13 @@ public class CourseCategoryRest {
     @GET
     public RestResponse<List<CourseCategoryDTO>> index(){
         var dados = this.usecase.listarRegistros();
+        return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
+    }
+
+    @GET
+    @Path("/{uuid}")
+    public RestResponse indexByUuid(UUID uuid){
+        var dados = this.usecase.listarRegistroPorUuid(uuid);
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
 

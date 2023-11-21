@@ -55,10 +55,13 @@ public class CourseUsecase {
         log.info("iniciando usecase de courses createOrUpdate, {}", DOMINIO);
         var timestamp = LocalDateTime.now();
         log.info("certification gravarRegistro -> será criado um novo registro, {}", DOMINIO);
-        UUID certificationUuid = UUID.randomUUID();
-        var path = Paths.get(PATH.concat(certificationUuid.toString()));
+        UUID courseUuid = UUID.randomUUID();
+        var path = Paths.get(PATH
+                .concat(dados.getCourseCategoryUuid().toString())
+                .concat("/")
+                .concat(courseUuid.toString()));
         var imageDto = this.image.storeImage(dados.getFile(), path);
-        dados.setUuid(certificationUuid);
+        dados.setUuid(courseUuid);
         var category = this.courseCategoryAdapter.recoveryByUuid(dados.getCourseCategoryUuid());
 
         dados.setPathOfImage(imageDto.getPathOfImage());
@@ -84,7 +87,10 @@ public class CourseUsecase {
         if(optionalRegistro.isPresent()){
             log.info("course atualizarRegistro -> será atualizado o registro, {}", DOMINIO);
             var domain = optionalRegistro.get();
-            var path = Paths.get(PATH.concat(domain.getUuid().toString()));
+            var path = Paths.get(PATH
+                    .concat(dados.getCourseCategoryUuid().toString())
+                    .concat("/")
+                    .concat(domain.getUuid().toString()));
             dados.setCreatedAt(domain.getCreatedAt());
             dados.setUpdatedAt(timestamp);
             var oldImageDto = new ImageDTO(domain.getPathOfImage(), domain.getPathOfImageThumb());
