@@ -3,6 +3,7 @@ package br.com.tiagoiwamoto.adapter.in;
 import br.com.tiagoiwamoto.core.usecase.ScholarityUsecase;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import jakarta.inject.Inject;
 import mock.ScholarityMock;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +21,7 @@ class ScholarityRestTest {
     private ScholarityUsecase usecase;
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void index() {
         var dados = ScholarityMock.generateDataDto();
         Mockito.when(this.usecase.listarRegistros()).thenReturn(List.of(dados));
@@ -39,6 +41,7 @@ class ScholarityRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void create() {
         var dados = ScholarityMock.generateDataDto();
         Mockito.when(this.usecase.gravarRegistro(Mockito.any())).thenReturn(dados);
@@ -58,6 +61,7 @@ class ScholarityRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void update() {
         var dados = ScholarityMock.generateDataDto();
         Mockito.when(this.usecase.atualizarRegistro(Mockito.any())).thenReturn(dados);
@@ -77,6 +81,7 @@ class ScholarityRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void delete() {
         var dados = ScholarityMock.generateDataDto();
         Mockito.doNothing().when(this.usecase).deletarRegistro(Mockito.any());

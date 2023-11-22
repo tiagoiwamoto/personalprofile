@@ -30,7 +30,7 @@ public class CourseCategoryRest {
 
     @GET
     @Path("/{uuid}")
-    public RestResponse indexByUuid(UUID uuid){
+    public RestResponse<CourseCategoryDTO> indexByUuid(UUID uuid){
         var dados = this.usecase.listarRegistroPorUuid(uuid);
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
