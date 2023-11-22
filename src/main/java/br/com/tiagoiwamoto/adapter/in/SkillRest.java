@@ -2,6 +2,7 @@ package br.com.tiagoiwamoto.adapter.in;
 
 import br.com.tiagoiwamoto.adapter.dto.SkillDTO;
 import br.com.tiagoiwamoto.core.usecase.SkillUsecase;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path(value = "/v1/api/skills")
+@Authenticated
 public class SkillRest {
 
     @Inject
