@@ -3,6 +3,7 @@ package br.com.tiagoiwamoto.adapter.in;
 import br.com.tiagoiwamoto.core.usecase.CourseUsecase;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import jakarta.inject.Inject;
 import mock.CourseMock;
 import org.junit.jupiter.api.Assertions;
@@ -22,6 +23,7 @@ class CourseRestTest {
     private CourseUsecase usecase;
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void index() {
         var dados = CourseMock.generateDataDto();
         Mockito.when(this.usecase.listarRegistros()).thenReturn(List.of(dados));
@@ -43,6 +45,7 @@ class CourseRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void indexByCategory() {
         var dados = CourseMock.generateDataDto();
         Mockito.when(this.usecase.listarRegistrosPorCategoria(Mockito.any())).thenReturn(List.of(dados));
@@ -64,6 +67,7 @@ class CourseRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void create() throws IOException {
         var dados = CourseMock.generateDataDto();
         Mockito.when(this.usecase.gravarRegistro(Mockito.any())).thenReturn(dados);
@@ -85,6 +89,7 @@ class CourseRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void update() {
         var dados = CourseMock.generateDataDto();
         Mockito.when(this.usecase.atualizarRegistro(Mockito.any())).thenReturn(dados);
@@ -106,6 +111,7 @@ class CourseRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void delete() {
         Mockito.doNothing().when(this.usecase).deletarRegistro(Mockito.any());
         var resposta = this.rest.delete(UUID.randomUUID());

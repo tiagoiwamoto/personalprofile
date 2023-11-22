@@ -33,6 +33,18 @@ class CourseCategoryUsecaseTest {
     }
 
     @Test
+    void listarRegistroPorUuid() {
+        var dados = CourseCategoryMock.generateDataEntity();
+        Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(dados);
+        var resposta = this.usecase.listarRegistroPorUuid(dados.getUuid());
+
+        Assertions.assertEquals(dados.getUuid(), resposta.getUuid());
+        Assertions.assertEquals(dados.getName(), resposta.getName());
+        Assertions.assertEquals(dados.getDescription(), resposta.getDescription());
+        Mockito.verify(this.adapter, Mockito.times(1)).recoveryByUuid(dados.getUuid());
+    }
+
+    @Test
     void gravarRegistro() {
         var dados = CourseCategoryMock.generateDataEntity();
         var dadosDto = CourseCategoryMock.generateDataDto();

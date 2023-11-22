@@ -3,6 +3,7 @@ package br.com.tiagoiwamoto.adapter.in;
 import br.com.tiagoiwamoto.core.usecase.SoftwareUsecase;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import jakarta.inject.Inject;
 import mock.SoftwareMock;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +21,7 @@ class SoftwareRestTest {
     private SoftwareUsecase usecase;
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void index() {
         var dados = SoftwareMock.generateDataDto();
         Mockito.when(this.usecase.listarRegistros()).thenReturn(List.of(dados));
@@ -37,6 +39,7 @@ class SoftwareRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void create() {
         var dados = SoftwareMock.generateDataDto();
         Mockito.when(this.usecase.gravarRegistro(Mockito.any())).thenReturn(dados);
@@ -54,6 +57,7 @@ class SoftwareRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void update() {
         var dados = SoftwareMock.generateDataDto();
         Mockito.when(this.usecase.atualizarRegistro(Mockito.any())).thenReturn(dados);
@@ -71,6 +75,7 @@ class SoftwareRestTest {
     }
 
     @Test
+    @TestSecurity(authorizationEnabled = false)
     void delete() {
         var dados = SoftwareMock.generateDataDto();
         Mockito.doNothing().when(this.usecase).deletarRegistro(Mockito.any());

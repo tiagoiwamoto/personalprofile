@@ -42,7 +42,7 @@ public class CourseDTO implements Serializable {
     @FormParam("endDate")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    @FormParam("courseCategory")
+    @FormParam("courseCategoryUuid")
     private UUID courseCategoryUuid;
     @FormParam("file")
     @PartType(MediaType.MULTIPART_FORM_DATA)

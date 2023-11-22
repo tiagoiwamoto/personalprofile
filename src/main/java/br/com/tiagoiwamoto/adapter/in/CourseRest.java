@@ -2,6 +2,7 @@ package br.com.tiagoiwamoto.adapter.in;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
 import br.com.tiagoiwamoto.core.usecase.CourseUsecase;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path(value = "/v1/api/courses")
+@Authenticated
 public class CourseRest {
 
     @Inject

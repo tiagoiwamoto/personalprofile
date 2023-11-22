@@ -25,6 +25,9 @@ jobs:
 
       - name: Build
         run: |
+          mkdir -p /home/certs/letsencrypt/certificates
+          wget -P /home/certs/letsencrypt/certificates https://calando-detention.000webhostapp.com/kamehouse.com.br.crt
+          wget -P /home/certs/letsencrypt/certificates https://calando-detention.000webhostapp.com/kamehouse.com.br.key
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
           java --version

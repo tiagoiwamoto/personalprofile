@@ -32,6 +32,14 @@ public class CourseCategoryUsecase implements Serializable {
         return listaDeDtos;
     }
 
+    public CourseCategoryDTO listarRegistroPorUuid(UUID uuid){
+        var dados = this.adapter.recoveryByUuid(uuid);
+        log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
+        var registro = this.mapper.toDto(dados);
+        log.info("conversão para DTO realizada com sucesso {}", registro);
+        return registro;
+    }
+
     public CourseCategoryDTO gravarRegistro(CourseCategoryDTO dados){
 
         var uuid = UUID.randomUUID();
