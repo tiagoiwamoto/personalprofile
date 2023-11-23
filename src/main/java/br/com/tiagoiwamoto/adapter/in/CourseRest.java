@@ -67,4 +67,11 @@ public class CourseRest {
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
 
+    @GET
+    @Path("/metrics/courses_category")
+    public RestResponse metrics2(){
+        var dados = this.usecase.getTotalOfCoursesByCategory();
+        return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
+    }
+
 }

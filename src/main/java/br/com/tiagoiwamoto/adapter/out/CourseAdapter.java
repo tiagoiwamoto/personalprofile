@@ -101,9 +101,22 @@ public class CourseAdapter implements CoursePort, Serializable {
     public List<CourseEntity> top10(){
         log.info("inciando o metodo metrics() domínio {}", ADAPTER_NAME);
         try{
+            var res = this.repository.getEntityManager().createQuery("select c.school as school, sum(c.duration) as total from CourseEntity c group by c.school").getResultList();
             var data = this.repository
                     .find("order by endDate desc limit 10")
                     .list();
+            log.info("Dado recuperado: {}", data);
+            return data;
+        }catch (Exception e){
+            log.error("não foi possível executar o metodo top10() domínio {}", ADAPTER_NAME);
+            throw new RuntimeException(); //TODO: Criar exception de falha ao deletar
+        }
+    }
+
+    public List getTotalOfCoursesByCategory(){
+        log.info("inciando o metodo metrics() domínio {}", ADAPTER_NAME);
+        try{
+            var data = this.repository.getEntityManager().createQuery("select c.school as school, sum(c.duration) as total from CourseEntity c group by c.school").getResultList();
             log.info("Dado recuperado: {}", data);
             return data;
         }catch (Exception e){

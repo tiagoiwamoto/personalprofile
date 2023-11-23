@@ -1,6 +1,7 @@
 package br.com.tiagoiwamoto.core.usecase;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
+import br.com.tiagoiwamoto.adapter.dto.CourseMetricDTO;
 import br.com.tiagoiwamoto.adapter.out.CourseAdapter;
 import br.com.tiagoiwamoto.adapter.out.CourseCategoryAdapter;
 import br.com.tiagoiwamoto.adapter.out.ImageAndThumbAdapter;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -136,6 +139,21 @@ public class CourseUsecase {
         var listaDeDtos = dados.stream().map(registro -> this.mapper.toDto(registro)).toList();
         log.info("conversão para DTO realizada com sucesso {}", listaDeDtos);
         return listaDeDtos;
+    }
+
+    public List<CourseMetricDTO> getTotalOfCoursesByCategory(){
+        List<CourseMetricDTO> metricas = new ArrayList<>();
+        var dados = this.adapter.getTotalOfCoursesByCategory();
+        log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
+        dados.forEach(dado -> {
+            var dadoParaArray = (Object[]) dado;
+            var arrayParaLista = Arrays.asList(dadoParaArray);
+            var school = arrayParaLista.get(0);
+            var tempo = String.valueOf(arrayParaLista.get(1));
+            metricas.add(new CourseMetricDTO(String.valueOf(school), Double.valueOf(tempo)));
+        });
+        log.info("conversão para DTO realizada com sucesso {}", metricas);
+        return metricas;
     }
 
 }
