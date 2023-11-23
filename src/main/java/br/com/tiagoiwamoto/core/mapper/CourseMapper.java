@@ -5,6 +5,7 @@ import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Mapper(componentModel = "cdi")
@@ -20,6 +21,9 @@ public interface CourseMapper {
 
 //    @Named("categoryUuid")
     default UUID toCourseCategoryDto(CourseEntity entity){
+        if(Objects.isNull(entity.getCourseCategory())){
+            return null;
+        }
         return entity.getCourseCategory().getUuid();
     }
 

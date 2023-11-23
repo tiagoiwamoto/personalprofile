@@ -85,4 +85,18 @@ public class CertificationAdapter implements CertificationPort, Serializable {
             throw new RuntimeException(); //TODO: Criar exception de falha ao deletar
         }
     }
+
+    public List<CertificationEntity> top10(){
+        log.info("inciando o metodo metrics() domínio {}", ADAPTER_NAME);
+        try{
+            var data = this.repository
+                    .find("order by earnDate desc limit 10")
+                    .list();
+            log.info("Dado recuperado: {}", data);
+            return data;
+        }catch (Exception e){
+            log.error("não foi possível executar o metodo top10() domínio {}", ADAPTER_NAME);
+            throw new RuntimeException(); //TODO: Criar exception de falha ao deletar
+        }
+    }
 }

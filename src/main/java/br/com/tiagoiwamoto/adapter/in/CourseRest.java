@@ -60,4 +60,11 @@ public class CourseRest {
         return RestResponse.ResponseBuilder.noContent().build();
     }
 
+    @GET
+    @Path("/metrics/top10")
+    public RestResponse<List<CourseDTO>> metrics(){
+        var dados = this.usecase.top10();
+        return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
+    }
+
 }

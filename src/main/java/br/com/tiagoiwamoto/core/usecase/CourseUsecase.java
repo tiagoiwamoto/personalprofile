@@ -130,4 +130,12 @@ public class CourseUsecase {
         }
     }
 
+    public List<CourseDTO> top10(){
+        var dados = this.adapter.top10();
+        log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
+        var listaDeDtos = dados.stream().map(registro -> this.mapper.toDto(registro)).toList();
+        log.info("conversão para DTO realizada com sucesso {}", listaDeDtos);
+        return listaDeDtos;
+    }
+
 }

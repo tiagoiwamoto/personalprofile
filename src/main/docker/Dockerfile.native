@@ -13,7 +13,7 @@
 #
 # docker stop rabbitmq
 # docker run --name personalprofile --network=host -i --rm -p 8080:8080 quarkus/personalprofile
-# docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -v /home/github/files:/work/files -p 8080:8080 quarkus/personalprofile
+# docker run --name personalprofile --network=host -i --env POSTGRES_USERNAME=${POSTGRES_USERNAME} --env POSTGRES_PASSWORD=${POSTGRES_PASSWORD} -v /home/github/files:/work/files -p 9000:9000 -p 9443:9443 quarkus/personalprofile
 #
 ###
 FROM ubuntu:jammy
@@ -28,7 +28,7 @@ RUN chmod +x /work/application
 ENV POSTGRES_USERNAME=${POSTGRES_USERNAME}
 ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
-EXPOSE 9000
+EXPOSE 9000 9443
 USER 1001
 
 ENTRYPOINT ["./application", "-Dquarkus.http.host=0.0.0.0"]

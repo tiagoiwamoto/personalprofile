@@ -53,4 +53,11 @@ public class CertificationRest {
         return RestResponse.ResponseBuilder.noContent().build();
     }
 
+    @GET
+    @Path("/metrics/top10")
+    public RestResponse<List<CertificationDTO>> metrics(){
+        var dados = this.usecase.top10();
+        return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
+    }
+
 }
