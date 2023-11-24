@@ -11,6 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class CourseUsecase {
             log.info("iniciando chamada ao adapter, domínio {}", DOMINIO);
             this.adapter.delete(registroExistente);
             log.info("registro removido com sucesso {}", registroExistente);
-            var path = Paths.get(PATH.concat(registroExistente.getUuid().toString()));
+            var path = Paths.get(PATH.concat(registroExistente.getCourseCategory().getUuid().toString()).concat(File.separator).concat(uuid.toString()));
             this.image.removeFiles(path);
             log.info("imagens para o registro removido com sucesso {}", registroExistente);
         }else{
