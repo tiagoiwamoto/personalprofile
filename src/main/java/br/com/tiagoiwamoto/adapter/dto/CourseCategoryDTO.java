@@ -8,6 +8,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -25,5 +26,5 @@ public class CourseCategoryDTO implements Serializable {
     private LocalDateTime updatedAt;
     private String name;
     private String description;
-//    private List<CourseDomain> courses;
+    private List<CourseDTO> courses;
 }

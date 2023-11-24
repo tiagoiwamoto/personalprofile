@@ -69,7 +69,7 @@ public class CourseRest {
 
     @GET
     @Path("/metrics/courses_category")
-    public RestResponse metrics2(){
+    public RestResponse metricsCoursesCategory(){
         var dados = this.usecase.getTotalOfCoursesByCategory();
         return RestResponse.ResponseBuilder.ok(dados, MediaType.APPLICATION_JSON).build();
     }
