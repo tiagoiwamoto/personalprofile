@@ -1,6 +1,7 @@
 package mock;
 
 import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
+import br.com.tiagoiwamoto.adapter.dto.CourseMetricDTO;
 import br.com.tiagoiwamoto.core.entity.CourseEntity;
 import com.github.javafaker.Faker;
 import org.jboss.resteasy.reactive.common.util.CaseInsensitiveMap;
@@ -30,6 +31,7 @@ public class CourseMock {
         data.setId(faker.number().numberBetween(1L, 9999));
         data.setCreatedAt(LocalDateTime.now());
         data.setUpdatedAt(LocalDateTime.now());
+        data.setCourseCategoryUuid(UUID.randomUUID());
         return data;
     }
 
@@ -47,7 +49,16 @@ public class CourseMock {
         data.setId(faker.number().numberBetween(1L, 9999));
         data.setCreatedAt(LocalDateTime.now());
         data.setUpdatedAt(LocalDateTime.now());
+        data.setCourseCategory(CourseCategoryMock.generateDataEntity());
         return data;
+    }
+
+    public static CourseMetricDTO gerarCourseMetric(){
+        Faker faker = new Faker(new Locale("pt-BR"));
+        var courseMetric = new CourseMetricDTO();
+        courseMetric.setSchool(faker.company().name());
+        courseMetric.setTotal(faker.number().randomDouble(1, 1, 999));
+        return courseMetric;
     }
 
     private static FileUpload generateMockFile(){

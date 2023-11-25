@@ -159,7 +159,7 @@ class CourseUsecaseTest {
         Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(dados);
         Mockito.doNothing().when(this.image).removeFiles(Mockito.any());
 
-        this.usecase.deletarRegistro(Mockito.any(UUID.class));
+        this.usecase.deletarRegistro(dados.getUuid());
 
         Mockito.verify(this.adapter, Mockito.times(1)).delete(Mockito.any());
     }
@@ -175,4 +175,25 @@ class CourseUsecaseTest {
         );
         Mockito.verify(this.adapter, Mockito.times(1)).recoveryByUuid(Mockito.any());
     }
+
+    @Test
+    void top10() {
+        var dados = CourseMock.generateDataEntity();
+        Mockito.when(this.adapter.top10()).thenReturn(List.of(dados));
+        var resposta = this.usecase.top10();
+
+        Assertions.assertEquals(dados.getUuid(), resposta.get(0).getUuid());
+        Assertions.assertEquals(dados.getName(), resposta.get(0).getName());
+        Assertions.assertEquals(dados.getPathOfImage(), resposta.get(0).getPathOfImage());
+        Assertions.assertEquals(dados.getPathOfImageThumb(), resposta.get(0).getPathOfImageThumb());
+        Assertions.assertEquals(dados.getDuration(), resposta.get(0).getDuration());
+        Assertions.assertEquals(dados.getSchool(), resposta.get(0).getSchool());
+        Assertions.assertEquals(dados.getStartDate(), resposta.get(0).getStartDate());
+        Assertions.assertEquals(dados.getEndDate(), resposta.get(0).getEndDate());
+        Assertions.assertEquals(dados.getCourseCategory().getUuid(), resposta.get(0).getCourseCategoryUuid());
+        Assertions.assertEquals(dados.getCreatedAt(), resposta.get(0).getCreatedAt());
+        Assertions.assertEquals(dados.getUpdatedAt(), resposta.get(0).getUpdatedAt());
+        Mockito.verify(this.adapter, Mockito.times(1)).top10();
+    }
+
 }
