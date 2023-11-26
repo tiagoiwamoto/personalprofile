@@ -175,4 +175,24 @@ class CourseAdapterTest {
         );
         Mockito.verify(this.repository, Mockito.times(1)).delete(dados);
     }
+
+    @Test
+    void top10() {
+        var dados = CourseMock.generateDataEntity();
+        PanacheQuery query = Mockito.mock(PanacheQuery.class);
+        Mockito.when(query.list()).thenReturn(List.of(dados));
+        Mockito.when(this.repository.find("order by endDate desc limit 10")).thenReturn(query);
+        var resposta = this.adapter.top10();
+
+        Assertions.assertEquals(dados.getUuid(), resposta.get(0).getUuid());
+        Assertions.assertEquals(dados.getName(), resposta.get(0).getName());
+        Assertions.assertEquals(dados.getPathOfImage(), resposta.get(0).getPathOfImage());
+        Assertions.assertEquals(dados.getPathOfImageThumb(), resposta.get(0).getPathOfImageThumb());
+        Assertions.assertEquals(dados.getDuration(), resposta.get(0).getDuration());
+        Assertions.assertEquals(dados.getSchool(), resposta.get(0).getSchool());
+        Assertions.assertEquals(dados.getStartDate(), resposta.get(0).getStartDate());
+        Assertions.assertEquals(dados.getEndDate(), resposta.get(0).getEndDate());
+        Assertions.assertEquals(dados.getUpdatedAt(), resposta.get(0).getUpdatedAt());
+        Mockito.verify(this.repository, Mockito.times(1)).find("order by endDate desc limit 10");
+    }
 }

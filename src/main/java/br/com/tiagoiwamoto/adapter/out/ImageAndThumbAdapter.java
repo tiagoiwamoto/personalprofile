@@ -67,7 +67,7 @@ public class ImageAndThumbAdapter {
     public ImageDTO validUpdateOfImage(Path path, FileUpload file, ImageDTO domain){
         log.info(String.format("validando se uma imagem sera armazenada ou substituida para o path: %s", path.toString()));
         ImageDTO imageDto;
-        if(!Objects.isNull(file)){
+        if(!Objects.isNull(file.fileName())){
             log.info(String.format("imagem será substituida por uma nova no path: %s", path));
             imageDto = this.replaceImage(file, path);
         }else{

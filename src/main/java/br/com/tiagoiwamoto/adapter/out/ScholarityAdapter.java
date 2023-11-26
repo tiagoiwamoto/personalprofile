@@ -63,6 +63,8 @@ public class ScholarityAdapter implements ScholarityPort, Serializable {
             registro.setSchoolName(data.getSchoolName());
             registro.setUpdatedAt(data.getUpdatedAt());
             registro.setStartDate(data.getStartDate());
+            registro.setPathOfImage(data.getPathOfImage());
+            registro.setPathOfImageThumb(data.getPathOfImageThumb());
             registro.setDateOfConclusion(data.getDateOfConclusion());
             registro.setTitleReceivedCourse(data.getTitleReceivedCourse());
             this.repository.persist(registro);

@@ -43,5 +43,9 @@ public class ScholarityEntity implements Serializable {
     private LocalDate startDate;
     @Column(name = "date_of_conclusion")
     private LocalDate dateOfConclusion;
+    @Column(name = "path_of_image")
+    private String pathOfImage;
+    @Column(name = "path_of_image_thumb")
+    private String pathOfImageThumb;
 
 }

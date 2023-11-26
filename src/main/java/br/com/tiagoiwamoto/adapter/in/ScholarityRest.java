@@ -2,7 +2,9 @@ package br.com.tiagoiwamoto.adapter.in;
 
 import br.com.tiagoiwamoto.adapter.dto.ScholarityDTO;
 import br.com.tiagoiwamoto.core.usecase.ScholarityUsecase;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path(value = "/v1/api/scholarities")
+@Authenticated
 public class ScholarityRest {
 
     @Inject
@@ -27,12 +30,14 @@ public class ScholarityRest {
     }
 
     @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public RestResponse<ScholarityDTO> create(ScholarityDTO dados){
         var resposta = this.usecase.gravarRegistro(dados);
         return RestResponse.ResponseBuilder.create(RestResponse.Status.CREATED, resposta).build();
     }
 
     @PUT
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public RestResponse<ScholarityDTO> update(ScholarityDTO dados){
         var resposta = this.usecase.atualizarRegistro(dados);
         return RestResponse.ResponseBuilder.ok(resposta).build();

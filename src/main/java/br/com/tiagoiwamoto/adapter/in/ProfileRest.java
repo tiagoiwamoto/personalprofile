@@ -2,6 +2,7 @@ package br.com.tiagoiwamoto.adapter.in;
 
 import br.com.tiagoiwamoto.adapter.dto.ProfileDTO;
 import br.com.tiagoiwamoto.core.usecase.ProfileUsecase;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Path(value = "/v1/api/profiles")
+@Authenticated
 public class ProfileRest {
 
     @Inject

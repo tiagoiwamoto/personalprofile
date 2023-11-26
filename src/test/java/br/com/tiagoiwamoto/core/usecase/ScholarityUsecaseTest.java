@@ -1,6 +1,8 @@
 package br.com.tiagoiwamoto.core.usecase;
 
+import br.com.tiagoiwamoto.adapter.out.ImageAndThumbAdapter;
 import br.com.tiagoiwamoto.adapter.out.ScholarityAdapter;
+import br.com.tiagoiwamoto.adapter.out.dto.ImageDTO;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
@@ -19,6 +21,8 @@ class ScholarityUsecaseTest {
 
     @InjectMock
     private ScholarityAdapter adapter;
+    @InjectMock
+    private ImageAndThumbAdapter image;
 
     @Test
     void listarRegistros() {
@@ -43,6 +47,8 @@ class ScholarityUsecaseTest {
         var dados = ScholarityMock.generateDataEntity();
         var dadosDto = ScholarityMock.generateDataDto();
         Mockito.when(this.adapter.save(Mockito.any())).thenReturn(dados);
+        Mockito.when(this.image.storeImage(Mockito.any(), Mockito.any()))
+                .thenReturn(new ImageDTO("/tmp/image.png", "/tmp/image_th.png"));
         var resposta = this.usecase.gravarRegistro(dadosDto);
 
         Assertions.assertEquals(dados.getUuid(), resposta.getUuid());
@@ -61,6 +67,10 @@ class ScholarityUsecaseTest {
     void atualizarRegistro() {
         var dados = ScholarityMock.generateDataEntity();
         var dadosDto = ScholarityMock.generateDataDto();
+        Mockito.when(this.image.storeImage(Mockito.any(), Mockito.any()))
+                .thenReturn(new ImageDTO("/tmp/image.png", "/tmp/image_th.png"));
+        Mockito.when(this.image.validUpdateOfImage(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn(new ImageDTO("/tmp/image.png", "/tmp/image_th.png"));
         Mockito.when(this.adapter.update(Mockito.any())).thenReturn(dados);
         Mockito.when(this.adapter.recoveryByUuid(Mockito.any())).thenReturn(dados);
         var resposta = this.usecase.atualizarRegistro(dadosDto);
