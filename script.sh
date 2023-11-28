@@ -21,7 +21,7 @@ echo "parando e removendo container anterior"
 docker ps -q --filter name=personalprofile | xargs -r docker stop
 docker ps -aq --filter name=personalprofile | xargs -r docker rm
 echo "executando container com o executavel"
-docker run --name personalprofile -d --network=host -i --env POSTGRES_USERNAME="${POSTGRES_USERNAME}" --env POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" -v /home/github/files:/work/files -p 8080:8080 quarkus/personalprofile
+docker run --name personalprofile -d --network=host -i --env POSTGRES_USERNAME="${POSTGRES_USERNAME}" --env POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" -v /home/github/files:/work/files -p 9000:9000 -p 9443:9443 quarkus/personalprofile
 echo "removendo dockerfile e executavel"
 rm Dockerfile.native personalprofile-1.0-SNAPSHOT-runner
 rm -R *.so
