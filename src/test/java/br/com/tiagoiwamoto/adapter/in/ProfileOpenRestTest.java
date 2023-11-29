@@ -31,10 +31,10 @@ import org.mockito.Mockito;
 import java.util.List;
 
 @QuarkusTest
-class OpenProfileRestTest {
+class ProfileOpenRestTest {
 
     @Inject
-    private OpenProfileRest rest;
+    private ProfileOpenRest rest;
     @InjectMock
     private CertificationUsecase certificationUsecase;
     @InjectMock
