@@ -18,8 +18,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.resteasy.reactive.RestResponse;
 
-@Path(value = "/openprofile")
-public class OpenProfileRest {
+@Path(value = "/v1/api/profiles/open")
+public class ProfileOpenRest {
 
     @Inject
     private CertificationUsecase certificationUsecase;
