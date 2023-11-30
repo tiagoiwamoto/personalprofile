@@ -18,7 +18,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.resteasy.reactive.RestResponse;
 
-@Path(value = "/v1/api/openprofiles/")
+@Path(value = "/metrics")
 public class ProfileOpenRest {
 
     @Inject
