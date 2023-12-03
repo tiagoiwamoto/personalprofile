@@ -4,7 +4,6 @@ import br.com.tiagoiwamoto.adapter.dto.CourseDTO;
 import br.com.tiagoiwamoto.adapter.dto.CourseMetricDTO;
 import br.com.tiagoiwamoto.core.usecase.CourseUsecase;
 import io.quarkus.security.Authenticated;
-import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -65,7 +64,6 @@ public class CourseRest {
     @GET
     @Path("/metrics/last10courses")
     @Consumes(MediaType.APPLICATION_JSON)
-    @PermitAll
     public RestResponse<List<CourseDTO>> last10courses(){
         var response = this.usecase.top10();
         return RestResponse.ResponseBuilder.ok(response).build();
@@ -74,7 +72,6 @@ public class CourseRest {
     @GET
     @Path("/metrics/bycategories")
     @Consumes(MediaType.APPLICATION_JSON)
-    @PermitAll
     public RestResponse<List<CourseMetricDTO>> metrics(){
         var response = this.usecase.getTotalOfCoursesByCategory();
         return RestResponse.ResponseBuilder.ok(response).build();
