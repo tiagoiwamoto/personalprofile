@@ -43,13 +43,13 @@ public class HomeFacade {
                 .skills(this.skillUsecase.listarRegistros())
                 .certifications(this.certificationUsecase.listarRegistros())
                 .coursesCategories(this.courseCategoryUsecase.listarRegistros())
-                .latestCourses(this.courseUsecase.top10())
                 .experiences(this.experienceUsecase.listarRegistros())
                 .profiles(this.profileUsecase.listarRegistros())
                 .scholarities(this.scholarityUsecase.listarRegistros())
                 .softwares(this.softwareUsecase.listarRegistros())
                 .projects(this.projectUsecase.listarRegistros())
                 .metrics(this.courseUsecase.getTotalOfCoursesByCategory())
+                .latestCourses(this.courseUsecase.top10())
                 .resumes(this.resumeUsecase.listarRegistros()).build();
         return response;
     }
