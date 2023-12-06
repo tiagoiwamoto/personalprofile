@@ -14,6 +14,7 @@ import java.util.List;
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
+@Builder
 public class OpenProfileResponse {
 
     private List<CertificationDTO> certifications;
