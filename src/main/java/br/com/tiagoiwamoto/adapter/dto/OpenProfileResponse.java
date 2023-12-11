@@ -18,6 +18,7 @@ import java.util.List;
 public class OpenProfileResponse {
 
     private List<CertificationDTO> certifications;
+    private List<CertificationDTO> latestCertifications;
     private List<CourseCategoryDTO> coursesCategories;
     private List<CourseDTO> latestCourses;
     private List<ExperienceDTO> experiences;
