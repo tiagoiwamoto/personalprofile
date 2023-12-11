@@ -42,6 +42,7 @@ public class HomeFacade {
         var response = OpenProfileResponse.builder()
                 .skills(this.skillUsecase.listarRegistros())
                 .certifications(this.certificationUsecase.listarRegistros())
+                .latestCertifications(this.certificationUsecase.top10())
                 .coursesCategories(this.courseCategoryUsecase.listarRegistros())
                 .experiences(this.experienceUsecase.listarRegistros())
                 .profiles(this.profileUsecase.listarRegistros())
