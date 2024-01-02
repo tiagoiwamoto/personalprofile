@@ -10,7 +10,7 @@ public interface CourseCategoryMapper {
 
 //    ProfileMapper INSTANCE = Mappers.getMapper(CourseCategoryMapper.class);
 
-    @Mapping(target = "courses", ignore = true)
+//    @Mapping(target = "courses", ignore = true)
     CourseCategoryDTO toDto(CourseCategoryEntity entity);
     CourseCategoryEntity toEntity(CourseCategoryDTO dto);
 
