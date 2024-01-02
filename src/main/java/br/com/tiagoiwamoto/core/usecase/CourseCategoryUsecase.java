@@ -26,6 +26,7 @@ public class CourseCategoryUsecase implements Serializable {
 
     public List<CourseCategoryDTO> listarRegistros(){
         var dados = this.adapter.all();
+
         log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
         var listaDeDtos = dados.stream().map(registro -> this.mapper.toDto(registro)).toList();
         log.info("conversão para DTO realizada com sucesso {}", listaDeDtos);
