@@ -34,7 +34,7 @@ jobs:
           mvn package -Dnative -Dmaven.test.skip=true
 
       - name: Gerando pacote
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: personalprofile
           path: ${{ github.workspace }}/target/*
