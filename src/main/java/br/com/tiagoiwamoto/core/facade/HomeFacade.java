@@ -49,7 +49,8 @@ public class HomeFacade {
                 .scholarities(this.scholarityUsecase.listarRegistros())
                 .softwares(this.softwareUsecase.listarRegistros())
                 .projects(this.projectUsecase.listarRegistros())
-                .metrics(this.courseUsecase.getTotalOfCoursesByCategory())
+                .coursesHoursMetrics(this.courseUsecase.getTotalHoursOfCoursesByCategory())
+                .courseTotalMetrics(this.courseUsecase.getTotalOfCoursesByCategory())
                 .latestCourses(this.courseUsecase.top10())
                 .resumes(this.resumeUsecase.listarRegistros()).build();
         return response;

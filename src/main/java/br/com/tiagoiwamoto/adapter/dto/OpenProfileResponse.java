@@ -28,5 +28,6 @@ public class OpenProfileResponse {
     private List<ScholarityDTO> scholarities;
     private List<SkillDTO> skills;
     private List<SoftwareDTO> softwares;
-    private List<CourseMetricDTO> metrics;
+    private List<CourseMetricDTO> coursesHoursMetrics;
+    private List<CourseMetricDTO> courseTotalMetrics;
 }

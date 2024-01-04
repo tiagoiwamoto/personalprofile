@@ -112,7 +112,7 @@ public class CourseAdapter implements CoursePort, Serializable {
         }
     }
 
-    public List getTotalOfCoursesByCategory(){
+    public List getTotalHoursOfCoursesByCategory(){
         log.info("inciando o metodo metrics() domínio {}", ADAPTER_NAME);
         try{
             var data = this.repository.getEntityManager().createQuery("select c.school as school, sum(c.duration) as total from CourseEntity c group by c.school").getResultList();
@@ -123,4 +123,18 @@ public class CourseAdapter implements CoursePort, Serializable {
             throw new RuntimeException(); //TODO: Criar exception de falha ao deletar
         }
     }
+
+    public List getTotalOfCoursesByCategory(){
+        log.info("inciando o metodo metrics() domínio {}", ADAPTER_NAME);
+        try{
+            var data = this.repository.getEntityManager().createQuery("select c.school as school, count(1) as total from CourseEntity c group by c.school").getResultList();
+            log.info("Dado recuperado: {}", data);
+            return data;
+        }catch (Exception e){
+            log.error("não foi possível executar o metodo top10() domínio {}", ADAPTER_NAME);
+            throw new RuntimeException(); //TODO: Criar exception de falha ao deletar
+        }
+    }
+
+
 }
