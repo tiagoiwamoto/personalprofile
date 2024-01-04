@@ -142,6 +142,21 @@ public class CourseUsecase {
         return listaDeDtos;
     }
 
+    public List<CourseMetricDTO> getTotalHoursOfCoursesByCategory(){
+        List<CourseMetricDTO> metricas = new ArrayList<>();
+        var dados = this.adapter.getTotalHoursOfCoursesByCategory();
+        log.info("iniciando conversão para DTO, metodo listarRegistros() domínio {}", DOMINIO);
+        dados.forEach(dado -> {
+            var dadoParaArray = (Object[]) dado;
+            var arrayParaLista = Arrays.asList(dadoParaArray);
+            var school = arrayParaLista.get(0);
+            var tempo = String.valueOf(arrayParaLista.get(1));
+            metricas.add(new CourseMetricDTO(String.valueOf(school), Double.valueOf(tempo)));
+        });
+        log.info("conversão para DTO realizada com sucesso {}", metricas);
+        return metricas;
+    }
+
     public List<CourseMetricDTO> getTotalOfCoursesByCategory(){
         List<CourseMetricDTO> metricas = new ArrayList<>();
         var dados = this.adapter.getTotalOfCoursesByCategory();

@@ -73,7 +73,7 @@ public class CourseRest {
     @Path("/metrics/bycategories")
     @Consumes(MediaType.APPLICATION_JSON)
     public RestResponse<List<CourseMetricDTO>> metrics(){
-        var response = this.usecase.getTotalOfCoursesByCategory();
+        var response = this.usecase.getTotalHoursOfCoursesByCategory();
         return RestResponse.ResponseBuilder.ok(response).build();
     }
 
